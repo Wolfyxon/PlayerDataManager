@@ -5,7 +5,8 @@ api-version: 1.19
 authors: [ Wolfyxon ]
 description: A plugin that allows you to find and modify players' data such as inventories without dealing with .dat files
 commands:
-  hi:
-    description: Test command
-    usage: /<command>
-    aliases: [hi,hii, hello]
+  getuuid:
+    description: player's UUID (also works in offline mode)
+    usage: /<command> <player>
+    permission: playerdatamgr.uuid
+    aliases: [uuid,getuuid]
