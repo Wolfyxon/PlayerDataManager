@@ -1,0 +1,11 @@
+name: PlayerDataManager
+version: '${project.version}'
+main: com.wolfyxon.playerdatamgr.main
+api-version: 1.19
+authors: [ Wolfyxon ]
+description: A plugin that allows you to find and modify players' data such as inventories without dealing with .dat files
+commands:
+  hi:
+    description: Test command
+    usage: /<command>
+    aliases: [hi,hii, hello]
