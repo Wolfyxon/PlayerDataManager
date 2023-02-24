@@ -5,8 +5,8 @@ import com.wolfyxon.playerdatamgr.commands.GetUuidCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class PlayerDataMgr extends JavaPlugin {
-    Messages msgs = new Messages();
-    Utils utils = new Utils();
+    public Messages msgs = new Messages();
+    public Utils utils = new Utils();
 
     @Override
     public void onEnable() {
