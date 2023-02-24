@@ -6,9 +6,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class TestCommand implements CommandExecutor {
+    Main plugin;
+    public TestCommand(Main main){
+        plugin = main;
+        main.getLogger().info("init");
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        new Main().getLogger().info("AAA");
+        plugin.getLogger().info("EXEC");
         sender.sendMessage("wasup");
         return false;
     }
