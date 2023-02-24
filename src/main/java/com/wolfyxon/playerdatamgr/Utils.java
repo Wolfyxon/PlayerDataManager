@@ -10,6 +10,7 @@ public class Utils {
     /*public String str2uuid(String string){
         return UUID.nameUUIDFromBytes(string.getBytes()).toString();
     }*/
+
     public UUID getOfflineUuid(String username){
         OfflinePlayer plr = Bukkit.getOfflinePlayer(username);
         return plr.getUniqueId();

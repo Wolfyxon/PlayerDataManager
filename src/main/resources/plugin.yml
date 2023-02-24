@@ -8,5 +8,10 @@ commands:
   getuuid:
     description: player's UUID (also works in offline mode)
     usage: /<command> <player>
-    permission: playerdatamgr.uuid
+    permission: playerdatamgr.getuuid
     aliases: [uuid,getuuid]
+  seen:
+    description: Checks when a player was last online (UUID can be used instead of username)
+    usage: /<command> <player>
+    permission: playerdatamgr.seen
+    aliases: [seen,lastonline]
