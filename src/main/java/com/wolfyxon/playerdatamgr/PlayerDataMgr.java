@@ -12,7 +12,7 @@ public final class PlayerDataMgr extends JavaPlugin {
         getCommand("getuuid").setExecutor(new GetUuidCommand(this));
 
 
-        getLogger().info("PlayerDataManager has started");
+        getLogger().info("PlayerDataManager has successfully loaded");
     }
     @Override
     public void onDisable() {

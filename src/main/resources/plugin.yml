@@ -7,6 +7,6 @@ description: A plugin that allows you to find and modify players' data such as i
 commands:
   getuuid:
     description: player's UUID (also works in offline mode)
-    usage: /<command> <player>
+    usage: /<command> <player> [world]
     permission: playerdatamgr.uuid
     aliases: [uuid,getuuid]
