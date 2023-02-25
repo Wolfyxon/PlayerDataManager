@@ -29,8 +29,19 @@ public class GetUuidCommand implements CommandExecutor {
         }
         String username = args[0];
 
-        OfflinePlayer plr = Bukkit.getOfflinePlayer(username);
-        UUID uuid = plr.getUniqueId();
+        OfflinePlayer offlinePlr = Bukkit.getOfflinePlayer(username);
+        UUID uuid = null;
+        if (offlinePlr.isOnline()){
+            uuid = offlinePlr.getUniqueId();
+        }
+        else {
+            if (Bukkit.getServer().getOnlineMode()) {
+
+            } else {
+                uuid = offlinePlr.getUniqueId();
+            }
+        }
+
         if(uuid == null){
             plugin.msgs.errorMsg(sender,"UUID==null. This is a bug, please report!");return true;
         }
@@ -51,7 +62,7 @@ public class GetUuidCommand implements CommandExecutor {
         uuid2msg.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD,strUUIDnoDash));
         sender.spigot().sendMessage(uuid1msg);
         sender.spigot().sendMessage(uuid2msg);
-        if(!plr.hasPlayedBefore()){
+        if(!offlinePlr.hasPlayedBefore()){
             sender.sendMessage(utils.colored("&6WARNING: This player has never played on this server!"));
         }
         return true;
