@@ -12,6 +12,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.awt.*;
 import java.util.UUID;
@@ -30,12 +31,14 @@ public class GetUuidCommand implements CommandExecutor {
         String username = args[0];
 
         OfflinePlayer offlinePlr = Bukkit.getOfflinePlayer(username);
+        Player onlinePlayer = Bukkit.getPlayer(username);
         UUID uuid = null;
-        if (offlinePlr.isOnline()){
+        if (onlinePlayer!=null && onlinePlayer.isOnline()){
             uuid = offlinePlr.getUniqueId();
         }
         else {
             if (Bukkit.getServer().getOnlineMode()) {
+                sender.sendMessage(utils.colored("&7(Server is in online mode) Querying MojangAPI, please wait..."));
                 UUID tmpUUID = plugin.mojangAPI.getOnlineUUID(username);
                 if(tmpUUID==null){
                     plugin.msgs.errorMsg(sender,"Player not found in the Mojang API or no internet connection.");

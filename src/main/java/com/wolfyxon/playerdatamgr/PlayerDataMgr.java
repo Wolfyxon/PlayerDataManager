@@ -4,6 +4,7 @@ import com.wolfyxon.playerdatamgr.commands.FirstJoinedCommand;
 import com.wolfyxon.playerdatamgr.commands.GetUuidCommand;
 
 import com.wolfyxon.playerdatamgr.commands.SeenCommand;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class PlayerDataMgr extends JavaPlugin {
@@ -17,7 +18,8 @@ public final class PlayerDataMgr extends JavaPlugin {
         getCommand("seen").setExecutor(new SeenCommand(this));
         getCommand("firstjoined").setExecutor(new FirstJoinedCommand(this));
 
-        getLogger().info("PlayerDataManager has successfully loaded");
+        Bukkit.getConsoleSender().sendMessage(utils.colored("&aPlayerDataManager has successfully loaded"));
+
     }
     @Override
     public void onDisable() {
