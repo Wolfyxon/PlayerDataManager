@@ -3,15 +3,18 @@ package com.wolfyxon.playerdatamgr;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.profile.PlayerProfile;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 public class Utils {
-    /*public String str2uuid(String string){
-        return UUID.nameUUIDFromBytes(string.getBytes()).toString();
-    }*/
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
+    public String dateFormat(Date date){
+        return dateFormat.format(date);
+    }
     public String colored(String message){
         return ChatColor.translateAlternateColorCodes('&',message);
     }
