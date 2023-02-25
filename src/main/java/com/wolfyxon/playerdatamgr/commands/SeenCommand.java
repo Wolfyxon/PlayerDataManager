@@ -1,6 +1,7 @@
 package com.wolfyxon.playerdatamgr.commands;
 
 import com.wolfyxon.playerdatamgr.PlayerDataMgr;
+import com.wolfyxon.playerdatamgr.Utils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -20,7 +21,8 @@ import java.util.UUID;
 
 public class SeenCommand implements CommandExecutor {
     PlayerDataMgr plugin;
-    public SeenCommand(PlayerDataMgr main){plugin = main;}
+    Utils utils;
+    public SeenCommand(PlayerDataMgr main){plugin = main;utils = plugin.utils;}
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(args.length < 1){
@@ -50,7 +52,7 @@ public class SeenCommand implements CommandExecutor {
             Date lastonline = new Date(timestamp);
 
             String strDate = format.format(lastonline);
-            sender.sendMessage(plugin.utils.colorFormat("&1&l"+offlinePlr.getName()+"&r&1 was last online on "+strDate));
+            sender.sendMessage(utils.colorFormat("&1&l"+offlinePlr.getName()+"&r&1 was last online on "+strDate));
             //sender.sendMessage(ChatColor.GREEN+""+ChatColor.BOLD+offlinePlr.getName()+ChatColor.RESET+""+ChatColor.GREEN+" was last online on "+strDate);
             return true;
         }

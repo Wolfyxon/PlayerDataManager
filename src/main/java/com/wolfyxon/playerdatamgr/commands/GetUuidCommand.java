@@ -1,6 +1,7 @@
 package com.wolfyxon.playerdatamgr.commands;
 
 import com.wolfyxon.playerdatamgr.PlayerDataMgr;
+import com.wolfyxon.playerdatamgr.Utils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -15,7 +16,8 @@ import java.util.UUID;
 
 public class GetUuidCommand implements CommandExecutor {
     PlayerDataMgr plugin;
-    public GetUuidCommand(PlayerDataMgr main){plugin = main;}
+    Utils utils;
+    public GetUuidCommand(PlayerDataMgr main){plugin = main;utils = plugin.utils;}
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         //This command will work for both offline and online servers
