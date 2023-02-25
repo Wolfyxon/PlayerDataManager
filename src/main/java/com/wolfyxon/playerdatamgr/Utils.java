@@ -15,6 +15,7 @@ import java.util.UUID;
 public class Utils {
     public String baseDir = System.getProperty("user.dir");
     public DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    public FileUtils file = new FileUtils();
     PlayerDataMgr plugin;
     public Utils(PlayerDataMgr main){plugin=main;}
 
