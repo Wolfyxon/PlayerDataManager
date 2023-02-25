@@ -1,5 +1,6 @@
 package com.wolfyxon.playerdatamgr;
 
+import com.wolfyxon.playerdatamgr.commands.FirstJoinedCommand;
 import com.wolfyxon.playerdatamgr.commands.GetUuidCommand;
 
 import com.wolfyxon.playerdatamgr.commands.SeenCommand;
@@ -13,6 +14,7 @@ public final class PlayerDataMgr extends JavaPlugin {
     public void onEnable() {
         getCommand("getuuid").setExecutor(new GetUuidCommand(this));
         getCommand("seen").setExecutor(new SeenCommand(this));
+        getCommand("firstjoined").setExecutor(new FirstJoinedCommand(this));
 
         getLogger().info("PlayerDataManager has successfully loaded");
     }

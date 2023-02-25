@@ -15,3 +15,8 @@ commands:
     usage: /<command> <player>
     permission: playerdatamgr.seen
     aliases: [seen,lastonline]
+  firstjoined:
+    description: Checks when was the first time a player has joined (UUID can be used instead of username)
+    usage: /<command> <player>
+    permission: playerdatamgr.firstjoined
+    aliases: [firstjoined,firstplayed,playedforthefirsttime,joinedforthefirsttime]
