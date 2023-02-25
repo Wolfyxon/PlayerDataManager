@@ -20,3 +20,8 @@ commands:
     usage: /<command> <player>
     permission: playerdatamgr.commands.firstjoined
     aliases: [firstjoined,firstplayed,playedforthefirsttime,joinedforthefirsttime]
+  getdata:
+    description: Accesses player's data
+    usage: /<command> <player>
+    permission: playerdatamgr.commands.getdata
+    aliases: [getdata,getplayerdata]

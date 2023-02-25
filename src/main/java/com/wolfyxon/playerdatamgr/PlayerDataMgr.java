@@ -1,6 +1,7 @@
 package com.wolfyxon.playerdatamgr;
 
 import com.wolfyxon.playerdatamgr.commands.FirstJoinedCommand;
+import com.wolfyxon.playerdatamgr.commands.GetDataCommand;
 import com.wolfyxon.playerdatamgr.commands.GetUuidCommand;
 
 import com.wolfyxon.playerdatamgr.commands.SeenCommand;
@@ -17,6 +18,7 @@ public final class PlayerDataMgr extends JavaPlugin {
         getCommand("getuuid").setExecutor(new GetUuidCommand(this));
         getCommand("seen").setExecutor(new SeenCommand(this));
         getCommand("firstjoined").setExecutor(new FirstJoinedCommand(this));
+        getCommand("getdata").setExecutor(new GetDataCommand(this));
 
         Bukkit.getConsoleSender().sendMessage(utils.colored("&aPlayerDataManager has successfully loaded"));
 

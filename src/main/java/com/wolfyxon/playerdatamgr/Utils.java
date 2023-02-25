@@ -6,6 +6,7 @@ import org.bukkit.OfflinePlayer;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,13 +36,25 @@ public class Utils {
             return UUID.fromString( string.replaceFirst("(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5") );
         }
     }
-    public boolean isPathSafe(String strPath) {
-        File file = new File(baseDir,strPath);
-        try {
-            return file.getCanonicalPath().startsWith(baseDir);
-        } catch (IOException e){
-            e.printStackTrace();
-            return false;
+    public class FileUtils {
+        public boolean isPathSafe(String strPath) {
+            File file = new File(baseDir,strPath);
+            try {
+                return file.getCanonicalPath().startsWith(baseDir);
+            } catch (IOException e){
+                e.printStackTrace();
+                return false;
+            }
         }
+        public boolean fileExists(String strPath){
+            File f = new File(strPath);
+            return (f.exists() && !f.isDirectory());
+        }
+        public boolean dirExists(String strPath){
+            File f = new File(strPath);
+            return (f.exists() && f.isDirectory());
+        }
+
     }
+
 }

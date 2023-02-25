@@ -2,7 +2,6 @@ package com.wolfyxon.playerdatamgr.commands;
 
 import com.wolfyxon.playerdatamgr.PlayerDataMgr;
 import com.wolfyxon.playerdatamgr.Utils;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,6 +15,8 @@ public class GetDataCommand implements CommandExecutor {
         String world = "world";
 
 
+
         return true;
     }
+
 }
