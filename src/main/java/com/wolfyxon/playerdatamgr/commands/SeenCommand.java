@@ -52,7 +52,7 @@ public class SeenCommand implements CommandExecutor {
             Date lastonline = new Date(timestamp);
 
             String strDate = format.format(lastonline);
-            sender.sendMessage(utils.colorFormat("&1&l"+offlinePlr.getName()+"&r&1 was last online on "+strDate));
+            sender.sendMessage(utils.colored("&1&l"+offlinePlr.getName()+"&r&1 was last online on "+strDate));
             //sender.sendMessage(ChatColor.GREEN+""+ChatColor.BOLD+offlinePlr.getName()+ChatColor.RESET+""+ChatColor.GREEN+" was last online on "+strDate);
             return true;
         }

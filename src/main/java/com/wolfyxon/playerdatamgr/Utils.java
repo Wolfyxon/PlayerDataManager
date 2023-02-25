@@ -12,7 +12,7 @@ public class Utils {
         return UUID.nameUUIDFromBytes(string.getBytes()).toString();
     }*/
 
-    public String colorFormat(String message){
+    public String colored(String message){
         return ChatColor.translateAlternateColorCodes('&',message);
     }
 
