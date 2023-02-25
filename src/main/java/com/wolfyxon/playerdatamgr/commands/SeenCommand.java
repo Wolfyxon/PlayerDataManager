@@ -46,12 +46,12 @@ public class SeenCommand implements CommandExecutor {
                 sender.sendMessage(utils.colored("&6&l"+offlinePlr.getName()+"&r&6 hasn't played on the server yet."));
                 return true;
             }
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
             long timestamp = offlinePlr.getLastPlayed();
             long distance = timestamp-new Date().getTime();
             Date lastonline = new Date(timestamp);
 
-            String strDate = format.format(lastonline);
+            String strDate = utils.dateFormat(lastonline);
             sender.sendMessage(utils.colored("&2&l"+offlinePlr.getName()+"&r&2 was last online on "+strDate));
             return true;
         }
