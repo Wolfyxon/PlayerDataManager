@@ -39,7 +39,8 @@ public class GetUuidCommand implements CommandExecutor {
             plugin.msgs.errorMsg(sender,"strUUID==null. This is a bug, please report!");
             return true;
         }
-        TextComponent msg = new TextComponent(utils.colored("&9UUID of &l"+username+"&r&9:&r\n&a"+strUUID));
+        sender.sendMessage(utils.colored("&1UUID of &l"+username+"&r&1:"));
+        TextComponent msg = new TextComponent(utils.colored("&a"+strUUID));
         Text hoverTxt = new Text("Click to copy");
         msg.setHoverEvent(
                 new HoverEvent(HoverEvent.Action.SHOW_TEXT,hoverTxt)
