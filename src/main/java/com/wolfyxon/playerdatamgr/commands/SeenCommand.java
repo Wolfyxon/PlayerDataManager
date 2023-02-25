@@ -33,7 +33,7 @@ public class SeenCommand implements CommandExecutor {
         String usernameOrUUID = args[0];
         Player onlinePlr = Bukkit.getPlayer(usernameOrUUID);
         if(onlinePlr!=null && onlinePlr.isOnline()){
-            sender.sendMessage(ChatColor.GREEN+""+ChatColor.BOLD+onlinePlr.getName()+ChatColor.RESET+""+ChatColor.GREEN+" is online!");
+            sender.sendMessage(utils.colored("&a&l"+onlinePlr.getName()+"&r&a is now online!"));
             return true;
         }
         else {
@@ -43,7 +43,7 @@ public class SeenCommand implements CommandExecutor {
                 return true;
             }
             if(!offlinePlr.hasPlayedBefore()){
-                sender.sendMessage(ChatColor.LIGHT_PURPLE+""+ChatColor.BOLD+offlinePlr.getName()+ChatColor.RESET+""+ChatColor.LIGHT_PURPLE+" has not played on the server yet.");
+                sender.sendMessage(utils.colored("&6&l"+offlinePlr.getName()+"&r&6 hasn't played on the server yet."));
                 return true;
             }
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -52,8 +52,7 @@ public class SeenCommand implements CommandExecutor {
             Date lastonline = new Date(timestamp);
 
             String strDate = format.format(lastonline);
-            sender.sendMessage(utils.colored("&1&l"+offlinePlr.getName()+"&r&1 was last online on "+strDate));
-            //sender.sendMessage(ChatColor.GREEN+""+ChatColor.BOLD+offlinePlr.getName()+ChatColor.RESET+""+ChatColor.GREEN+" was last online on "+strDate);
+            sender.sendMessage(utils.colored("&2&l"+offlinePlr.getName()+"&r&2 was last online on "+strDate));
             return true;
         }
     }
