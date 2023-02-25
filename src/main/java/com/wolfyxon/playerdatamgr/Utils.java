@@ -11,6 +11,8 @@ import java.util.UUID;
 
 public class Utils {
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    PlayerDataMgr plugin;
+    public Utils(PlayerDataMgr main){plugin=main;}
 
     public String dateFormat(Date date){
         return dateFormat.format(date);
