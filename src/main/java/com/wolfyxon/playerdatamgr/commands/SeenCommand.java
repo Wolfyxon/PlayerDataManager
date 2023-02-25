@@ -27,6 +27,7 @@ public class SeenCommand implements CommandExecutor {
             plugin.msgs.errorMsg(sender,"No player username or UUID specified.");
             return true;
         }
+        
         String usernameOrUUID = args[0];
         Player onlinePlr = Bukkit.getPlayer(usernameOrUUID);
         if(onlinePlr!=null && onlinePlr.isOnline()){
@@ -49,7 +50,8 @@ public class SeenCommand implements CommandExecutor {
             Date lastonline = new Date(timestamp);
 
             String strDate = format.format(lastonline);
-            sender.sendMessage(ChatColor.GREEN+""+ChatColor.BOLD+offlinePlr.getName()+ChatColor.RESET+""+ChatColor.GREEN+" was last online on "+strDate);
+            sender.sendMessage(plugin.utils.colorFormat("&1&l"+offlinePlr.getName()+"&r&1 was last online on "+strDate));
+            //sender.sendMessage(ChatColor.GREEN+""+ChatColor.BOLD+offlinePlr.getName()+ChatColor.RESET+""+ChatColor.GREEN+" was last online on "+strDate);
             return true;
         }
     }
