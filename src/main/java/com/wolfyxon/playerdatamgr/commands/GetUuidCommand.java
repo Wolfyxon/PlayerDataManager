@@ -39,14 +39,18 @@ public class GetUuidCommand implements CommandExecutor {
             plugin.msgs.errorMsg(sender,"strUUID==null. This is a bug, please report!");
             return true;
         }
+        String strUUIDnoDash = strUUID.replaceAll("-","");
+
         sender.sendMessage(utils.colored("&1UUID of &l"+username+"&r&1:"));
-        TextComponent msg = new TextComponent(utils.colored("&a"+strUUID));
+        TextComponent uuid1msg = new TextComponent(utils.colored("&a"+strUUID));
+        TextComponent uuid2msg = new TextComponent(utils.colored("&a"+strUUIDnoDash));
         Text hoverTxt = new Text("Click to copy");
-        msg.setHoverEvent(
-                new HoverEvent(HoverEvent.Action.SHOW_TEXT,hoverTxt)
-        );
-        msg.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD,strUUID));
-        sender.spigot().sendMessage(msg);
+        HoverEvent hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT,hoverTxt);
+
+        uuid1msg.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD,strUUID));
+        uuid2msg.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD,strUUIDnoDash));
+        sender.spigot().sendMessage(uuid1msg);
+        sender.spigot().sendMessage(uuid2msg);
         if(!plr.hasPlayedBefore()){
             sender.sendMessage(utils.colored("&6WARNING: This player has never played on this server!"));
         }
