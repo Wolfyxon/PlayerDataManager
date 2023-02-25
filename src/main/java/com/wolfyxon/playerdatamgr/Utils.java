@@ -13,8 +13,8 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Utils {
-    String baseDir = System.getProperty("user.dir");
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    public String baseDir = System.getProperty("user.dir");
+    public DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     PlayerDataMgr plugin;
     public Utils(PlayerDataMgr main){plugin=main;}
 
