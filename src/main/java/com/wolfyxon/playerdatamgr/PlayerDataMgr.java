@@ -7,6 +7,7 @@ import com.wolfyxon.playerdatamgr.commands.GetUuidCommand;
 import com.wolfyxon.playerdatamgr.commands.SeenCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.json.JSONObject;
 
 public final class PlayerDataMgr extends JavaPlugin {
     public Messages msgs = new Messages();
@@ -21,6 +22,7 @@ public final class PlayerDataMgr extends JavaPlugin {
         getCommand("getdata").setExecutor(new GetDataCommand(this));
 
         Bukkit.getConsoleSender().sendMessage(utils.colored("&aPlayerDataManager has successfully loaded"));
+
 
     }
     @Override

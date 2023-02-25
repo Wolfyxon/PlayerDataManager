@@ -37,6 +37,17 @@ public class Utils {
             return UUID.fromString( string.replaceFirst("(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5") );
         }
     }
+
+    public double[] bytes2doubleArray(byte[] byteArray){
+        double[] doubles = new double[byteArray.length / 3];
+        for (int i = 0, j = 0; i != doubles.length; ++i, j += 3) {
+            doubles[i] = (double)( (byteArray[j  ] & 0xff) |
+                    ((byteArray[j+1] & 0xff) <<  8) |
+                    ( byteArray[j+2]         << 16));
+        }
+        return doubles;
+    }
+
     public class FileUtils {
         public boolean isPathSafe(String strPath) {
             File file = new File(baseDir,strPath);
