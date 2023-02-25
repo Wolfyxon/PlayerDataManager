@@ -13,8 +13,8 @@ import java.util.UUID;
 
 public class MojangAPI {
     PlayerDataMgr plugin;
-    Utils utils = plugin.utils;
-    public MojangAPI(PlayerDataMgr main){plugin = main;}
+    Utils utils;
+    public MojangAPI(PlayerDataMgr main){plugin = main;utils=plugin.utils;}
     public static String httpRequest(String urlString) {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
