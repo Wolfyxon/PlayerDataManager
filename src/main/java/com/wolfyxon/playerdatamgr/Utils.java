@@ -25,4 +25,11 @@ public class Utils {
         OfflinePlayer plr = Bukkit.getOfflinePlayer(username);
         return plr.getUniqueId();
     }
+    public UUID str2uuid(String string){
+        if(string.contains("-")){
+            return UUID.fromString(string);
+        } else {
+            return UUID.fromString( string.replaceFirst("(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5") );
+        }
+    }
 }

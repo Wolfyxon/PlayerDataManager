@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class PlayerDataMgr extends JavaPlugin {
     public Messages msgs = new Messages();
     public Utils utils = new Utils(this);
+    public MojangAPI mojangAPI = new MojangAPI(this);
 
     @Override
     public void onEnable() {
