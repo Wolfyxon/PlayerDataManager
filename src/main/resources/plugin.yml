@@ -8,15 +8,15 @@ commands:
   getuuid:
     description: player's UUID (also works in offline mode)
     usage: /<command> <player>
-    permission: playerdatamgr.getuuid
+    permission: playerdatamgr.commands.getuuid
     aliases: [uuid,getuuid]
   seen:
     description: Checks when a player was last online (UUID can be used instead of username)
     usage: /<command> <player>
-    permission: playerdatamgr.seen
+    permission: playerdatamgr.commands.seen
     aliases: [seen,lastonline]
   firstjoined:
     description: Checks when was the first time a player has joined (UUID can be used instead of username)
     usage: /<command> <player>
-    permission: playerdatamgr.firstjoined
+    permission: playerdatamgr.commands.firstjoined
     aliases: [firstjoined,firstplayed,playedforthefirsttime,joinedforthefirsttime]
