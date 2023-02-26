@@ -53,6 +53,9 @@ public class GetOfflineUuidCommand implements CommandExecutor {
         if(!offlinePlr.hasPlayedBefore()){
             sender.sendMessage(utils.colored("&6WARNING: This player has never played on this server!"));
         }
+        if(Bukkit.getServer().getOnlineMode()){
+            sender.sendMessage(utils.colored("&6WARNING: Server is in online mode, consider using &l/onlineuuid"));
+        }
         return true;
     }
 }
