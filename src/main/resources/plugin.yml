@@ -23,5 +23,4 @@ commands:
   playerdata:
     description: Main command. Used for reading, modyfying and removing data
     usage: /<command> <action>
-    permission: playerdatamgr.commands.main
     aliases: [playerdata,playerdatamanager]

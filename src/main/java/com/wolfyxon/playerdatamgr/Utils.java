@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
@@ -36,6 +37,10 @@ public class Utils {
         } else {
             return UUID.fromString( string.replaceFirst("(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5") );
         }
+    }
+
+    public boolean strArrContains(String[] array,String string){
+        return Arrays.stream(array).anyMatch(string::equals);
     }
 
     public double[] bytes2doubleArray(byte[] byteArray){
