@@ -3,7 +3,6 @@ package com.wolfyxon.playerdatamgr.commands;
 import com.wolfyxon.playerdatamgr.NBTManager;
 import com.wolfyxon.playerdatamgr.PlayerDataMgr;
 import com.wolfyxon.playerdatamgr.Utils;
-import net.querz.nbt.io.*;
 import net.querz.nbt.tag.CompoundTag;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,12 +10,11 @@ import org.bukkit.command.CommandSender;
 import org.json.JSONArray;
 
 import java.io.File;
-import java.io.IOException;
 
-public class GetDataCommand implements CommandExecutor {
+public class PlayerDataCommand implements CommandExecutor {
     PlayerDataMgr plugin;
     Utils utils;
-    public GetDataCommand(PlayerDataMgr main){plugin = main;utils = plugin.utils;}
+    public PlayerDataCommand(PlayerDataMgr main){plugin = main;utils = plugin.utils;}
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         NBTManager nbt = new NBTManager(plugin);
