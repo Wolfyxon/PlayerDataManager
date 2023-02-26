@@ -6,10 +6,23 @@ authors: [ Wolfyxon ]
 description: All in one plugin for checking and managing players' data even if they are not online. Useful on non-premium servers and with shulker/book bans
 commands:
   getuuid:
-    description: player's UUID (also works in offline mode)
+    description: Gets UUID from player. Works on both offline and online mode servers.
     usage: /<command> <player>
-    permission: playerdatamgr.commands.getuuid
+    permission: playerdatamgr.commands.uuid
     aliases: [uuid,getuuid]
+  getonlineuuid:
+    description: Gets player's UUID from the MojangAPI using username. Use only in online mode servers.
+    usage: /<command> <player>
+    permission: playerdatamgr.commands.uuid
+    aliases: [onlineuuid,getonlineuuid]
+  getofflineuuid:
+    description: Gets offline player's UUID. Use only in offline mode servers.
+    usage: /<command> <player>
+    permission: playerdatamgr.commands.uuid
+    aliases: [ offlineuuid,getofflineuuid ]
+
+
+
   seen:
     description: Checks when a player was last online (UUID can be used instead of username)
     usage: /<command> <player>
