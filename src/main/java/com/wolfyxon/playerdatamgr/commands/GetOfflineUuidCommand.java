@@ -21,7 +21,6 @@ public class GetOfflineUuidCommand implements CommandExecutor {
     public GetOfflineUuidCommand(PlayerDataMgr main){plugin = main;utils = plugin.utils;}
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        //This command will work for both offline and online servers
         if(args.length < 1){
             plugin.msgs.errorMsg(sender,"No player username specified.");
             return true;
