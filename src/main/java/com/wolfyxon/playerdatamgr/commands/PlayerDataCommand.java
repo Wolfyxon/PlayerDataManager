@@ -112,7 +112,7 @@ public class PlayerDataCommand implements CommandExecutor {
 
         switch (action) {
             case "file":
-
+                plugin.msgs.clickCopy(sender,"&1Path: &r"+filePath,filePath);
                 break;
             case "get":
                 JSONObject json = nbt.tag2json(data);
