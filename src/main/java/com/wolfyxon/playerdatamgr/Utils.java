@@ -3,6 +3,7 @@ package com.wolfyxon.playerdatamgr;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +42,6 @@ public class Utils {
             return getOfflineUUID(username);
         }
     }
-
     public UUID str2uuid(String string){
         if(string.contains("-")){
             return UUID.fromString(string);
@@ -49,7 +49,6 @@ public class Utils {
             return UUID.fromString( string.replaceFirst("(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5") );
         }
     }
-
 
     public boolean strIsUUID(String string){
         try{
@@ -62,6 +61,10 @@ public class Utils {
 
     public boolean strArrContains(String[] array,String string){
         return Arrays.stream(array).anyMatch(string::equals);
+    }
+
+    public String prettyJSON(JSONObject json){
+        return json.toString(4);
     }
 
     public double[] bytes2doubleArray(byte[] byteArray){

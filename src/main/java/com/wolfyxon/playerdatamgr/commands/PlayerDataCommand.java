@@ -12,6 +12,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,11 +69,8 @@ public class PlayerDataCommand implements CommandExecutor {
                     sender.sendMessage("a");
                     break;
                 case "get":
-                    try {
-                        sender.sendMessage(SNBTUtil.toSNBT(data));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    JSONObject json = nbt.tag2json(data);
+                    sender.sendMessage(utils.prettyJSON(json));
                     break;
                 case "reset":
                     break;
