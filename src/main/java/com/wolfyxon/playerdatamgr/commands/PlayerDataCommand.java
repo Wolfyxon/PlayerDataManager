@@ -3,6 +3,7 @@ package com.wolfyxon.playerdatamgr.commands;
 import com.wolfyxon.playerdatamgr.NBTManager;
 import com.wolfyxon.playerdatamgr.PlayerDataMgr;
 import com.wolfyxon.playerdatamgr.Utils;
+import com.wolfyxon.playerdatamgr.classes.Vector3;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.querz.nbt.io.NBTUtil;
@@ -52,6 +53,8 @@ public class PlayerDataCommand implements CommandExecutor {
         actions.put("get","Gets raw JSON data from player.");
         actions.put("reset","Completely deletes player's data. Proceed with caution.");
         actions.put("clearinventory","Clears player's inventory. Useful in fixing book/shulker bans.");
+        actions.put("getpos","Gets last player's coordinates.");
+        actions.put("getspawn","Gets player's spawn location.");
 
         String action = args[0];
         if(!actions.containsKey(action)){plugin.msgs.errorMsg(sender, "Invalid action '" + args[0] + "'. Use /playerdata help for help.");return true;}
@@ -137,7 +140,9 @@ public class PlayerDataCommand implements CommandExecutor {
                     plugin.msgs.errorMsg(sender,"An error occurred.");
                 }
                 break;
+            case "getpos":
 
+                break;
         }
 
         return true;
