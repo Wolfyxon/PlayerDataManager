@@ -16,72 +16,95 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class PlayerDataCommand implements CommandExecutor {
     PlayerDataMgr plugin;
     Utils utils;
-    public PlayerDataCommand(PlayerDataMgr main){plugin = main;utils = plugin.utils;}
+
+    public PlayerDataCommand(PlayerDataMgr main) {
+        plugin = main;
+        utils = plugin.utils;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         NBTManager nbt = new NBTManager(plugin);
 
-        if(args.length==0){
+        if (args.length == 0) {
             sender.sendMessage(utils.colored("&a&lPlayerDataManager"));
             sender.sendMessage(utils.colored("&4by Wolfyxon"));
             sender.sendMessage(utils.colored("&1Source code: &rhttps://github.com/Wolfyxon/PlayerDataManager"));
             sender.sendMessage(utils.colored("&1For list of commands type: &a&l/playerdata help"));
             TextComponent bugMsg = new TextComponent(utils.colored("&4&lReport a bug"));
-            bugMsg.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL,"https://github.com/Wolfyxon/PlayerDataManager/issues"));
+            bugMsg.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/Wolfyxon/PlayerDataManager/issues"));
             sender.spigot().sendMessage(bugMsg);
             return true;
         }
 
         //TODO: multiworld support
-        if(args.length>0){
-            String action = args[0];
-            String usernameOrUUID = null;
-            UUID uuid = null;
-            String filePath = null;
-            CompoundTag data = null;
-            if(args.length>1 && action != "help"){
-                usernameOrUUID = args[1];
-                if(utils.strIsUUID(usernameOrUUID)){
-                    //Use UUID
-                    uuid = UUID.fromString(usernameOrUUID);
-                } else {
-                    //Use username
-                    if(Bukkit.getServer().getOnlineMode()){sender.sendMessage(utils.colored("&7Querying MojangAPI, please wait..."));}
-                    uuid = utils.getUUID(usernameOrUUID);
-                    if(uuid==null && Bukkit.getServer().getOnlineMode()){plugin.msgs.errorMsg(sender, "Player not found in the Mojang API or no internet connection.");return true;}
+        Map<String, String> actions = new HashMap<String, String>();
+        actions.put("help","Lists all actions and their usage");
+        actions.put("get","Gets raw JSON data from player.");
+        actions.put("reset","Completely deletes player's data. Proceed with caution.");
+
+        String action = args[0];
+        if(!actions.containsKey(action)){plugin.msgs.errorMsg(sender, "Invalid action '" + args[0] + "'. Use /playerdata help for help.");return true;}
+        if (action == "help") {
+            sender.sendMessage("test");
+            return true;
+        }
+        if(args.length<1){plugin.msgs.errorMsg(sender,"No action specified. See /playerdata help");return true;}
+
+        String usernameOrUUID = null;
+        UUID uuid = null;
+        String filePath = null;
+        CompoundTag data = null;
+        if (args.length > 1) {
+            usernameOrUUID = args[1];
+            if (utils.strIsUUID(usernameOrUUID)) {
+                uuid = UUID.fromString(usernameOrUUID);
+            } else {
+                if (Bukkit.getServer().getOnlineMode()) {
+                    sender.sendMessage(utils.colored("&7Querying MojangAPI, please wait..."));
                 }
-                filePath = nbt.playerdataDir+uuid.toString()+".dat";
-                sender.sendMessage(filePath);
-                if(!utils.file.isPathSafe(filePath,nbt.playerdataDir)){plugin.msgs.errorMsg(sender,"Path traversal detected.");return true;}
-                if(!utils.file.fileExists(filePath)){plugin.msgs.errorMsg(sender,"Player data file not found for this user.");return true;}
-                data = nbt.tagFromFile(filePath);
-                if(data==null){plugin.msgs.errorMsg(sender,"Failed to get playerdata file");return true;}
+                uuid = utils.getUUID(usernameOrUUID);
+                if (uuid == null && Bukkit.getServer().getOnlineMode()) {
+                    plugin.msgs.errorMsg(sender, "Player not found in the Mojang API or no internet connection.");
+                    return true;
+                }
             }
-
-            switch (action){
-                case "help":
-                    sender.sendMessage("a");
-                    break;
-                case "get":
-                    JSONObject json = nbt.tag2json(data);
-                    sender.sendMessage(utils.prettyJSON(json));
-                    break;
-                case "reset":
-                    break;
-
-                default:
-                    plugin.msgs.errorMsg(sender,"Invalid action '"+args[0]+"'. Use /playerdata help for help.");
+            filePath = nbt.playerdataDir + uuid.toString() + ".dat";
+            sender.sendMessage(filePath);
+            if (!utils.file.isPathSafe(filePath, nbt.playerdataDir)) {
+                plugin.msgs.errorMsg(sender, "Path traversal detected.");
+                return true;
             }
-
-
+            if (!utils.file.fileExists(filePath)) {
+                plugin.msgs.errorMsg(sender, "Player data file not found for this user.");
+                return true;
+            }
+            data = nbt.tagFromFile(filePath);
+            if (data == null) {
+                plugin.msgs.errorMsg(sender, "Failed to get playerdata file");
+                return true;
+            }
+        } else {
+            plugin.msgs.errorMsg(sender, "Please specify player username or UUID after specified action");
+            return true;
         }
 
+        switch (action) {
+            case "get":
+                JSONObject json = nbt.tag2json(data);
+                sender.sendMessage(utils.prettyJSON(json));
+                break;
+            case "reset":
+                break;
+
+        }
 
         return true;
     }
