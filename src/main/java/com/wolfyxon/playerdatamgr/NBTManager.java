@@ -14,10 +14,11 @@ import java.nio.ByteBuffer;
 public class NBTManager {
     PlayerDataMgr plugin;
     Utils utils;
+    public String playerdataDir = "world/playerdata/";
     public NBTManager(PlayerDataMgr main){plugin=main;utils=plugin.utils;}
 
     public CompoundTag tagFromFile(String path) {
-        if(!utils.file.isPathSafe(path)){return null;}
+        if(!utils.file.isPathSafe(path,utils.baseDir)){return null;}
         File f = new File(path);
         try {
             NamedTag tagFile = NBTUtil.read(f);

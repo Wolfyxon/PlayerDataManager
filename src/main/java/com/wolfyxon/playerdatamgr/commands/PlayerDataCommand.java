@@ -6,17 +6,20 @@ import com.wolfyxon.playerdatamgr.Utils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.querz.nbt.tag.CompoundTag;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.json.JSONArray;
 
 import java.io.File;
+import java.util.UUID;
 
 public class PlayerDataCommand implements CommandExecutor {
     PlayerDataMgr plugin;
     Utils utils;
     public PlayerDataCommand(PlayerDataMgr main){plugin = main;utils = plugin.utils;}
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         NBTManager nbt = new NBTManager(plugin);
@@ -31,13 +34,37 @@ public class PlayerDataCommand implements CommandExecutor {
             sender.spigot().sendMessage(bugMsg);
             return true;
         }
+
+        //TODO: multiworld support
         if(args.length>0){
             String action = args[0];
+            String usernameOrUUID = null;
+            UUID uuid = null;
+            String filePath = null;
+            if(args.length>1 && action != "help"){
+                usernameOrUUID = args[1];
+                if(utils.strIsUUID(usernameOrUUID)){
+                    //Use UUID
+                    uuid = UUID.fromString(usernameOrUUID);
+                } else {
+                    //Use username
+                    if(Bukkit.getServer().getOnlineMode()){sender.sendMessage(utils.colored("&7Querying MojangAPI, please wait..."));}
+                    uuid = utils.getUUID(usernameOrUUID);
+                    if(uuid==null && Bukkit.getServer().getOnlineMode()){plugin.msgs.errorMsg(sender, "Player not found in the Mojang API or no internet connection.");return true;}
+                }
+                filePath = nbt.playerdataDir+uuid.toString()+".dat";
+                if(!utils.file.isPathSafe(filePath,nbt.playerdataDir)){plugin.msgs.errorMsg(sender,"Path traversal detected.");return true;}
+                if(!utils.file.fileExists(filePath)){plugin.msgs.errorMsg(sender,"Player data file not found for this user.");return true;}
+            }
             switch (action){
                 case "help":
                     sender.sendMessage("a");
                     break;
+                case "get":
 
+                    break;
+                case "reset":
+                    break;
 
                 default:
                     plugin.msgs.errorMsg(sender,"Invalid action '"+args[0]+"'. Use /playerdata help for help.");
