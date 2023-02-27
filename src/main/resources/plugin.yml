@@ -5,6 +5,10 @@ api-version: 1.19
 authors: [ Wolfyxon ]
 description: All in one plugin for checking and managing players' data even if they are not online. Useful on non-premium servers and with shulker/book bans
 commands:
+  playerdata:
+    description: Main command. Used for reading, modyfying and removing data
+    usage: /<command> <action>
+    aliases: [ playerdata ]
   getuuid:
     description: Gets UUID from player. Works on both offline and online mode servers.
     usage: /<command> <player>
@@ -20,7 +24,6 @@ commands:
     usage: /<command> <player>
     permission: playerdatamgr.commands.uuid
     aliases: [ offlineuuid,offlineuuid ]
-
   seen:
     description: Checks when a player was last online (UUID can be used instead of username)
     usage: /<command> <player>
@@ -31,7 +34,3 @@ commands:
     usage: /<command> <player>
     permission: playerdatamgr.commands.firstjoined
     aliases: [firstjoined,firstplayed]
-  playerdata:
-    description: Main command. Used for reading, modyfying and removing data
-    usage: /<command> <action>
-    aliases: [playerdata]
