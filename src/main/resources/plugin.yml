@@ -34,4 +34,4 @@ commands:
   playerdata:
     description: Main command. Used for reading, modyfying and removing data
     usage: /<command> <action>
-    aliases: [playerdata,playerdatamanager]
+    aliases: [playerdata]
