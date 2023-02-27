@@ -27,15 +27,36 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&',message);
     }
 
-    public UUID getOfflineUuid(String username){
+    public UUID getOfflineUUID(String username){
         OfflinePlayer plr = Bukkit.getOfflinePlayer(username);
         return plr.getUniqueId();
     }
+    public UUID getOnlineUUID(String username){
+        return plugin.mojangAPI.getOnlineUUID(username);
+    }
+    public UUID getUUID(String username){
+        if(Bukkit.getServer().getOnlineMode()){
+            return getOnlineUUID(username);
+        } else {
+            return getOfflineUUID(username);
+        }
+    }
+
     public UUID str2uuid(String string){
         if(string.contains("-")){
             return UUID.fromString(string);
         } else {
             return UUID.fromString( string.replaceFirst("(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5") );
+        }
+    }
+
+
+    public boolean strIsUUID(String string){
+        try{
+            UUID uuid = UUID.fromString(string);
+            return true;
+        } catch (IllegalArgumentException exception){
+            return false;
         }
     }
 
@@ -54,10 +75,10 @@ public class Utils {
     }
 
     public class FileUtils {
-        public boolean isPathSafe(String strPath) {
-            File file = new File(baseDir,strPath);
+        public boolean isPathSafe(String strPath,String base) {
+            File file = new File(base,strPath);
             try {
-                return file.getCanonicalPath().startsWith(baseDir);
+                return file.getCanonicalPath().startsWith(base);
             } catch (IOException e){
                 e.printStackTrace();
                 return false;
