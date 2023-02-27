@@ -90,7 +90,6 @@ public class PlayerDataCommand implements CommandExecutor {
                 }
             }
             filePath = nbt.playerdataDir + uuid.toString() + ".dat";
-            sender.sendMessage(filePath);
             if (!utils.file.isPathSafe(filePath, nbt.playerdataDir)) {
                 plugin.msgs.errorMsg(sender, "Path traversal detected.");
                 return true;
