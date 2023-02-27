@@ -76,9 +76,9 @@ public class Utils {
 
     public class FileUtils {
         public boolean isPathSafe(String strPath,String base) {
-            File file = new File(base,strPath);
+            File file = new File(baseDir+base,strPath);
             try {
-                return file.getCanonicalPath().startsWith(base);
+                return file.getCanonicalPath().startsWith(baseDir+base);
             } catch (IOException e){
                 e.printStackTrace();
                 return false;
