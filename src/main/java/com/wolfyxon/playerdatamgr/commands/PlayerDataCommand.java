@@ -5,6 +5,7 @@ import com.wolfyxon.playerdatamgr.PlayerDataMgr;
 import com.wolfyxon.playerdatamgr.Utils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.querz.nbt.io.NBTUtil;
 import net.querz.nbt.io.SNBTUtil;
 import net.querz.nbt.tag.CompoundTag;
 import org.bukkit.Bukkit;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -49,6 +51,7 @@ public class PlayerDataCommand implements CommandExecutor {
         actions.put("help","Lists all actions and their usage");
         actions.put("get","Gets raw JSON data from player.");
         actions.put("reset","Completely deletes player's data. Proceed with caution.");
+        actions.put("clearinventory","Clears player's inventory. Useful in fixing book/shulker bans.");
 
         String action = args[0];
         if(!actions.containsKey(action)){plugin.msgs.errorMsg(sender, "Invalid action '" + args[0] + "'. Use /playerdata help for help.");return true;}
@@ -68,6 +71,7 @@ public class PlayerDataCommand implements CommandExecutor {
         UUID uuid = null;
         String filePath = null;
         CompoundTag data = null;
+        JSONObject jsonData = null;
         if (args.length > 1) {
             usernameOrUUID = args[1];
             if (utils.strIsUUID(usernameOrUUID)) {
@@ -93,6 +97,7 @@ public class PlayerDataCommand implements CommandExecutor {
                 return true;
             }
             data = nbt.tagFromFile(filePath);
+            jsonData = nbt.tag2json(data);
             if (data == null) {
                 plugin.msgs.errorMsg(sender, "Failed to get playerdata file");
                 return true;
@@ -120,6 +125,18 @@ public class PlayerDataCommand implements CommandExecutor {
                             +"achievements, XP and enderchest. Please note that you can use ex. /playerdata clearinventory or clearachievements if "
                             +"you want to remove only a specific part of the data.\nRepeat this command with &lconfirm&r&4 at the end to proceed."));
                 }
+                break;
+            case "clearinventory":
+                jsonData.put("Inventory",new ArrayList<>());
+                try {
+                    data = (CompoundTag) SNBTUtil.fromSNBT(jsonData.toString());
+                    NBTUtil.write(data,new File(filePath));
+                    sender.sendMessage(utils.colored("&6Inventory has been cleared."));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    plugin.msgs.errorMsg(sender,"An error occurred.");
+                }
+
                 break;
 
         }
