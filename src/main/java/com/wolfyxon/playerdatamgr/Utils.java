@@ -19,7 +19,8 @@ public class Utils {
     public DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     public FileUtils file = new FileUtils();
     PlayerDataMgr plugin;
-    public Utils(PlayerDataMgr main){plugin=main;}
+    public MojangAPI mojangAPI;
+    public Utils(PlayerDataMgr main){plugin=main;mojangAPI = plugin.mojangAPI;}
 
     public String dateFormat(Date date){
         return dateFormat.format(date);
