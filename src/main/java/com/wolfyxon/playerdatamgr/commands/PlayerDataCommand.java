@@ -108,6 +108,18 @@ public class PlayerDataCommand implements CommandExecutor {
                 sender.sendMessage(utils.prettyJSON(json));
                 break;
             case "reset":
+                if(args.length > 2 && args[2].equals("confirm")){
+                    File f = new File(filePath);
+                    if(f.delete()) {
+                        sender.sendMessage(utils.colored("&cPlayerdata has been reset for this user."));
+                    } else {
+                        plugin.msgs.errorMsg(sender,"An error occurred. No data was removed.");
+                    }
+                } else {
+                    sender.sendMessage(utils.colored("&4You are about to COMPLETELY erase this user's data including inventory, "
+                            +"achievements, XP and enderchest. Please note that you can use ex. /playerdata clearinventory or clearachievements if "
+                            +"you want to remove only a specific part of the data.\nRepeat this command with &lconfirm&r&4 at the end to proceed."));
+                }
                 break;
 
         }
