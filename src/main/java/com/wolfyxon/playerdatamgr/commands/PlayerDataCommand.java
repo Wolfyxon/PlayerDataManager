@@ -143,7 +143,7 @@ public class PlayerDataCommand implements CommandExecutor {
             case "getpos":
                 Vector3 pos = Vector3.fromArray((JSONArray) jsonData.get("Pos"));
                 sender.sendMessage(utils.colored("Position: "+pos.toStringColored()));
-                plugin.msgs.clickTpMsg(sender,"&l&1Teleport",pos);
+                plugin.msgs.clickTpMsg(sender,"&1&lTeleport",pos);
                 break;
         }
 
