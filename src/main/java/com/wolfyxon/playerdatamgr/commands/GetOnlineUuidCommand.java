@@ -32,7 +32,9 @@ public class GetOnlineUuidCommand implements CommandExecutor {
         UUID uuid = null;
         String username = args[0];
         OfflinePlayer offlinePlr = Bukkit.getOfflinePlayer(username);
-        sender.sendMessage(utils.colored("&7Querying MojangAPI, please wait..."));
+        if(!plugin.mojangAPI.isUUIDCachedForUsername(username)){
+            sender.sendMessage(utils.colored("&7Querying MojangAPI, please wait..."));
+        }
         UUID tmpUUID = utils.getOnlineUUID(username);
         if (tmpUUID == null) {
             plugin.msgs.errorMsg(sender, "Player not found in the Mojang API or no internet connection.");
