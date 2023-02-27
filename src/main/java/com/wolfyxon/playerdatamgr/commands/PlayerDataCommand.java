@@ -143,6 +143,17 @@ public class PlayerDataCommand implements CommandExecutor {
                     plugin.msgs.errorMsg(sender,"An error occurred.");
                 }
                 break;
+            case "clearender":
+                jsonData.put("EnderItems",new ArrayList<>());
+                try {
+                    data = (CompoundTag) SNBTUtil.fromSNBT(jsonData.toString());
+                    NBTUtil.write(data,new File(filePath));
+                    sender.sendMessage(utils.colored("&Enderchest has been cleared."));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    plugin.msgs.errorMsg(sender,"An error occurred.");
+                }
+                break;
             case "getpos":
                 Vector3 pos = Vector3.fromArray((JSONArray) jsonData.get("Pos"));
                 sender.sendMessage(utils.colored("Position: "+pos.intXYZ().toStringColored()));
@@ -158,7 +169,6 @@ public class PlayerDataCommand implements CommandExecutor {
                 sender.sendMessage(utils.colored("Spawn position: "+spawn.toStringColored()));
                 plugin.msgs.clickTpMsg(sender,"&9&lTeleport",spawn);
                 break;
-
         }
 
         return true;
