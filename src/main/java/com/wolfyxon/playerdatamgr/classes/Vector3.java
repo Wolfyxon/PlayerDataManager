@@ -21,10 +21,13 @@ public class Vector3 {
     }
 
     public Vector3 intXYZ(){
+        int intX = (int) x;
+        int intY = (int) y;
+        int intZ = (int) z;
         return new Vector3(
-                Integer.parseInt(String.valueOf(x)),
-                Integer.parseInt(String.valueOf(y)),
-                Integer.parseInt(String.valueOf(z))
+                Double.parseDouble(String.valueOf(intX)),
+                Double.parseDouble(String.valueOf(intY)),
+                Double.parseDouble(String.valueOf(intZ))
         );
     }
 
