@@ -8,8 +8,8 @@ public class Vector3 {
     public double z;
     public Vector3(double x,double y,double z){
         this.x = x;
-        this.y = x;
-        this.z = x;
+        this.y = y;
+        this.z = z;
     }
 
     @Override
@@ -18,6 +18,14 @@ public class Vector3 {
     }
     public String toStringColored(){
         return "&c"+String.valueOf(x)+" &2"+String.valueOf(y)+" &1"+String.valueOf(z);
+    }
+
+    public Vector3 intXYZ(){
+        return new Vector3(
+                Integer.parseInt(String.valueOf(x)),
+                Integer.parseInt(String.valueOf(y)),
+                Integer.parseInt(String.valueOf(z))
+        );
     }
 
     public static Vector3 fromArray(JSONArray doubleArray){
