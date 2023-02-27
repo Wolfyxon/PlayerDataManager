@@ -71,11 +71,17 @@ public class MojangAPI {
 
     public Map<String, UUID> UUIDcache = new HashMap<String, UUID>();
 
+    public UUID getCachedUUID(String username){
+        return UUIDcache.get(username);
+    }
+    public boolean isUUIDCachedForUsername(String username){
+        return (getCachedUUID(username) != null);
+    }
+
     public UUID getOnlineUUID(String username){
         if(UUIDcache.containsKey(username)){
             return (UUID) UUIDcache.get(username);
         }
-
         JSONObject json = getUserProfile(username);
         if(json==null){return null;}
         String strUUID = (String) json.get("id");
