@@ -143,8 +143,19 @@ public class PlayerDataCommand implements CommandExecutor {
             case "getpos":
                 Vector3 pos = Vector3.fromArray((JSONArray) jsonData.get("Pos"));
                 sender.sendMessage(utils.colored("Position: "+pos.intXYZ().toStringColored()));
-                plugin.msgs.clickTpMsg(sender,"&1&lTeleport",pos);
+                plugin.msgs.clickTpMsg(sender,"&9&lTeleport",pos);
                 break;
+            case "getspawn":
+                if( !(jsonData.has("SpawnX") && jsonData.has("SpawnY") && jsonData.has("SpawnZ") ) ){
+                    plugin.msgs.errorMsg(sender,"This player has no spawn set.");
+                    return true;
+                }
+                int x = jsonData.getInt("SpawnX");int y = jsonData.getInt("SpawnY");int z = jsonData.getInt("SpawnZ");
+                Vector3 spawn = new Vector3(x,y,z);
+                sender.sendMessage(utils.colored("Spawn position: "+spawn.toStringColored()));
+                plugin.msgs.clickTpMsg(sender,"&9&lTeleport",spawn);
+                break;
+
         }
 
         return true;
