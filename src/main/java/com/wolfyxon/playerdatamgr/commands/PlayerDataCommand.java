@@ -5,6 +5,7 @@ import com.wolfyxon.playerdatamgr.PlayerDataMgr;
 import com.wolfyxon.playerdatamgr.Utils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.querz.nbt.io.SNBTUtil;
 import net.querz.nbt.tag.CompoundTag;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -13,6 +14,7 @@ import org.bukkit.command.CommandSender;
 import org.json.JSONArray;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.UUID;
 
 public class PlayerDataCommand implements CommandExecutor {
@@ -41,6 +43,7 @@ public class PlayerDataCommand implements CommandExecutor {
             String usernameOrUUID = null;
             UUID uuid = null;
             String filePath = null;
+            CompoundTag data = null;
             if(args.length>1 && action != "help"){
                 usernameOrUUID = args[1];
                 if(utils.strIsUUID(usernameOrUUID)){
@@ -53,15 +56,23 @@ public class PlayerDataCommand implements CommandExecutor {
                     if(uuid==null && Bukkit.getServer().getOnlineMode()){plugin.msgs.errorMsg(sender, "Player not found in the Mojang API or no internet connection.");return true;}
                 }
                 filePath = nbt.playerdataDir+uuid.toString()+".dat";
+                sender.sendMessage(filePath);
                 if(!utils.file.isPathSafe(filePath,nbt.playerdataDir)){plugin.msgs.errorMsg(sender,"Path traversal detected.");return true;}
                 if(!utils.file.fileExists(filePath)){plugin.msgs.errorMsg(sender,"Player data file not found for this user.");return true;}
+                data = nbt.tagFromFile(filePath);
+                if(data==null){plugin.msgs.errorMsg(sender,"Failed to get playerdata file");return true;}
             }
+
             switch (action){
                 case "help":
                     sender.sendMessage("a");
                     break;
                 case "get":
-
+                    try {
+                        sender.sendMessage(SNBTUtil.toSNBT(data));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case "reset":
                     break;
