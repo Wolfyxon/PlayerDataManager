@@ -141,7 +141,8 @@ public class PlayerDataCommand implements CommandExecutor {
                 }
                 break;
             case "getpos":
-
+                Vector3 pos = Vector3.fromArray((JSONArray) jsonData.get("Pos"));
+                sender.sendMessage(utils.colored("Position: "+pos.toStringColored()));
                 break;
         }
 
