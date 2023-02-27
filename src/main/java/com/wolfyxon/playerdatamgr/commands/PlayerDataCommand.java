@@ -50,6 +50,7 @@ public class PlayerDataCommand implements CommandExecutor {
         //TODO: multiworld support
         Map<String, String> actions = new HashMap<String, String>();
         actions.put("help","Lists all actions and their usage");
+        actions.put("file","Gets playerdata .dat file path.");
         actions.put("get","Gets raw JSON data from player.");
         actions.put("reset","Completely deletes player's data. Proceed with caution.");
         actions.put("clearinventory","Clears player's inventory. Useful in fixing book/shulker bans.");
@@ -110,6 +111,9 @@ public class PlayerDataCommand implements CommandExecutor {
         }
 
         switch (action) {
+            case "file":
+
+                break;
             case "get":
                 JSONObject json = nbt.tag2json(data);
                 sender.sendMessage(utils.prettyJSON(json));
