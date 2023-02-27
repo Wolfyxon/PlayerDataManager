@@ -9,19 +9,17 @@ commands:
     description: Gets UUID from player. Works on both offline and online mode servers.
     usage: /<command> <player>
     permission: playerdatamgr.commands.uuid
-    aliases: [uuid,getuuid]
+    aliases: [uuid,uuid]
   getonlineuuid:
     description: Gets player's UUID from the MojangAPI using username. Use only in online mode servers.
     usage: /<command> <player>
     permission: playerdatamgr.commands.uuid
-    aliases: [onlineuuid,getonlineuuid]
+    aliases: [onlineuuid,onlineuuid]
   getofflineuuid:
     description: Gets offline player's UUID. Use only in offline mode servers.
     usage: /<command> <player>
     permission: playerdatamgr.commands.uuid
-    aliases: [ offlineuuid,getofflineuuid ]
-
-
+    aliases: [ offlineuuid,offlineuuid ]
 
   seen:
     description: Checks when a player was last online (UUID can be used instead of username)
@@ -32,7 +30,7 @@ commands:
     description: Checks when was the first time a player has joined (UUID can be used instead of username)
     usage: /<command> <player>
     permission: playerdatamgr.commands.firstjoined
-    aliases: [firstjoined,firstplayed,playedforthefirsttime,joinedforthefirsttime]
+    aliases: [firstjoined,firstplayed]
   playerdata:
     description: Main command. Used for reading, modyfying and removing data
     usage: /<command> <action>
