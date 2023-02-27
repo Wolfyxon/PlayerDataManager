@@ -77,7 +77,7 @@ public class PlayerDataCommand implements CommandExecutor {
             if (utils.strIsUUID(usernameOrUUID)) {
                 uuid = UUID.fromString(usernameOrUUID);
             } else {
-                if (Bukkit.getServer().getOnlineMode()) {
+                if (Bukkit.getServer().getOnlineMode() && !plugin.mojangAPI.isUUIDCachedForUsername(usernameOrUUID)) {
                     sender.sendMessage(utils.colored("&7Querying MojangAPI, please wait..."));
                 }
                 uuid = utils.getUUID(usernameOrUUID);
