@@ -52,11 +52,17 @@ public class PlayerDataCommand implements CommandExecutor {
 
         String action = args[0];
         if(!actions.containsKey(action)){plugin.msgs.errorMsg(sender, "Invalid action '" + args[0] + "'. Use /playerdata help for help.");return true;}
-        if (action == "help") {
-            sender.sendMessage("test");
+        if(args.length<1){plugin.msgs.errorMsg(sender,"No action specified. See /playerdata help");return true;}
+        sender.sendMessage(action);
+        if (action.equals("help")) {
+            sender.sendMessage(utils.colored("&aUsage: &l/playerdata <action> <username or UUID> <...>"));
+            for (Map.Entry entry : actions.entrySet()) {
+                String act = (String) entry.getKey();
+                String description = (String) entry.getValue();
+                sender.sendMessage(utils.colored("&2&l"+act+":&r&6 "+description));
+            }
             return true;
         }
-        if(args.length<1){plugin.msgs.errorMsg(sender,"No action specified. See /playerdata help");return true;}
 
         String usernameOrUUID = null;
         UUID uuid = null;
