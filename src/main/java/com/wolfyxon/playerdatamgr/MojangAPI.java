@@ -9,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class MojangAPI {
@@ -67,12 +69,19 @@ public class MojangAPI {
         }
     }
 
+    public Map<String, UUID> UUIDcache = new HashMap<String, UUID>();
+
     public UUID getOnlineUUID(String username){
+        if(UUIDcache.containsKey(username)){
+            return (UUID) UUIDcache.get(username);
+        }
+
         JSONObject json = getUserProfile(username);
         if(json==null){return null;}
         String strUUID = (String) json.get("id");
         if(strUUID==null){return null;}
         UUID uuid = utils.str2uuid(strUUID);
+        UUIDcache.put(username,uuid);
         return uuid;
     }
 

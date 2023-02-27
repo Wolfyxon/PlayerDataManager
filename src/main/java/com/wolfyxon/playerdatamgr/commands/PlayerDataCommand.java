@@ -136,7 +136,6 @@ public class PlayerDataCommand implements CommandExecutor {
                     e.printStackTrace();
                     plugin.msgs.errorMsg(sender,"An error occurred.");
                 }
-
                 break;
 
         }
