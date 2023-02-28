@@ -10,9 +10,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 public class Utils {
     public String baseDir = System.getProperty("user.dir");
@@ -20,7 +18,13 @@ public class Utils {
     public FileUtils file = new FileUtils();
     PlayerDataMgr plugin;
     public MojangAPI mojangAPI;
-    public Utils(PlayerDataMgr main){plugin=main;mojangAPI = plugin.mojangAPI;}
+    public Map<Integer, String> dimensions = new HashMap<Integer, String>();
+    public Utils(PlayerDataMgr main){
+        plugin=main;mojangAPI = plugin.mojangAPI;
+        dimensions.put(-1,"nether");
+        dimensions.put(-1,"overworld");
+        dimensions.put(1,"the_end");
+    }
 
     public String dateFormat(Date date){
         return dateFormat.format(date);
@@ -76,6 +80,11 @@ public class Utils {
                     ( byteArray[j+2]         << 16));
         }
         return doubles;
+    }
+
+
+    public String dimensionFromID(int id){
+        return dimensions.get(id);
     }
 
     public class FileUtils {
