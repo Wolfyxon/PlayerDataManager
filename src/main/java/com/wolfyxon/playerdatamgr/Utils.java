@@ -82,10 +82,20 @@ public class Utils {
         return doubles;
     }
 
-
     public String dimensionFromID(int id){
         return dimensions.get(id);
     }
+
+    public String getDimension(Object idOrName){
+        if(idOrName instanceof String){
+            return (String) idOrName;
+        }
+        if(idOrName instanceof Integer){
+            return dimensionFromID( (int) idOrName);
+        }
+        return null;
+    }
+
 
     public class FileUtils {
         public boolean isPathSafe(String strPath,String base) {
