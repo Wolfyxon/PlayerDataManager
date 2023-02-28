@@ -21,9 +21,9 @@ public class Utils {
     public Map<Integer, String> dimensions = new HashMap<Integer, String>();
     public Utils(PlayerDataMgr main){
         plugin=main;mojangAPI = plugin.mojangAPI;
-        dimensions.put(-1,"nether");
-        dimensions.put(-1,"overworld");
-        dimensions.put(1,"the_end");
+        dimensions.put(-1,"minecraft:nether");
+        dimensions.put(-1,"minecraft:overworld");
+        dimensions.put(1,"minecraft:the_end");
     }
 
     public String dateFormat(Date date){
@@ -88,7 +88,7 @@ public class Utils {
 
     public String getDimension(Object idOrName){
         if(idOrName instanceof String){
-            if(idOrName.equals("nether")){return "the_nether";} //It's different for playerdata and commands
+            if(idOrName.equals("minecraft:nether")){return "minecraft:the_nether";} //It's different for playerdata and commands
             return (String) idOrName;
         }
         if(idOrName instanceof Integer){

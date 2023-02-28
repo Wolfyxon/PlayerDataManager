@@ -159,7 +159,9 @@ public class PlayerDataCommand implements CommandExecutor {
             case "getpos":
                 Vector3 pos = new Vector3((JSONArray) jsonData.get("Pos"));
                 sender.sendMessage(utils.colored("Position: "+pos.intXYZ().toStringColored()));
-                plugin.msgs.clickTpMsg(sender,"&9&lTeleport",pos);
+                String dimension = utils.getDimension(jsonData.get("Dimension"));
+                sender.sendMessage(utils.colored("Dimension: &2"+dimension));
+                plugin.msgs.clickSuggest(sender,"&9&lTeleport","/execute in "+dimension+" run tp @s "+pos.toString());
                 break;
             case "getspawn":
                 if( !(jsonData.has("SpawnX") && jsonData.has("SpawnY") && jsonData.has("SpawnZ") ) ){
