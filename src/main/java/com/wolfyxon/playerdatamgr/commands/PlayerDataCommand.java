@@ -169,8 +169,9 @@ public class PlayerDataCommand implements CommandExecutor {
                 }
                 int x = jsonData.getInt("SpawnX");int y = jsonData.getInt("SpawnY");int z = jsonData.getInt("SpawnZ");
                 Vector3 spawn = new Vector3(x,y,z);
+                String spawnDimension = utils.getDimension(jsonData.get("SpawnDimension"));
                 sender.sendMessage(utils.colored("Spawn position: "+spawn.toStringColored()));
-                plugin.msgs.clickTpMsg(sender,"&9&lTeleport",spawn);
+                plugin.msgs.clickSuggest(sender,"&9&lTeleport","/execute in "+spawnDimension+" run tp @s "+spawn.toString());
                 break;
         }
 
