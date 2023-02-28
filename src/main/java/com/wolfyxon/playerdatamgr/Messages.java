@@ -30,5 +30,10 @@ public class Messages {
         msg.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, copyText));
         sender.spigot().sendMessage(msg);
     }
+    public void clickSuggest(CommandSender sender, String message, String command){
+        TextComponent msg = new TextComponent(plugin.utils.colored(message));
+        msg.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, command));
+        sender.spigot().sendMessage(msg);
+    }
 
 }
