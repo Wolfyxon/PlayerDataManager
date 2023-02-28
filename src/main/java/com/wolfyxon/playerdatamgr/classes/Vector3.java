@@ -21,6 +21,11 @@ public class Vector3 {
         this.y = y;
         this.z = z;
     }
+    public Vector3(JSONArray jsonArray){
+        x = (double) jsonArray.get(0);
+        y = (double) jsonArray.get(1);
+        z = (double) jsonArray.get(2);
+    }
 
     @Override
     public String toString() {
@@ -41,8 +46,5 @@ public class Vector3 {
         );
     }
 
-    public static Vector3 fromArray(JSONArray doubleArray){
-        return new Vector3((Double) doubleArray.get(0),(Double) doubleArray.get(1),(Double) doubleArray.get(2));
-    }
 
 }

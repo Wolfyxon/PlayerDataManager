@@ -157,7 +157,7 @@ public class PlayerDataCommand implements CommandExecutor {
                 break;
             //TODO: dimension support (NOTE: this varies in different versions!!!!!!!)
             case "getpos":
-                Vector3 pos = Vector3.fromArray((JSONArray) jsonData.get("Pos"));
+                Vector3 pos = new Vector3((JSONArray) jsonData.get("Pos"));
                 sender.sendMessage(utils.colored("Position: "+pos.intXYZ().toStringColored()));
                 plugin.msgs.clickTpMsg(sender,"&9&lTeleport",pos);
                 break;
