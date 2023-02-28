@@ -88,6 +88,7 @@ public class Utils {
 
     public String getDimension(Object idOrName){
         if(idOrName instanceof String){
+            if(idOrName.equals("nether")){return "the_nether";} //It's different for playerdata and commands
             return (String) idOrName;
         }
         if(idOrName instanceof Integer){
