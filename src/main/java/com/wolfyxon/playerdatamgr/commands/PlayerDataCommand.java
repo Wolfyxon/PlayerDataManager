@@ -155,7 +155,6 @@ public class PlayerDataCommand implements CommandExecutor {
                     plugin.msgs.errorMsg(sender,"An error occurred.");
                 }
                 break;
-            //TODO: dimension support (NOTE: this varies in different versions!!!!!!!)
             case "getpos":
                 Vector3 pos = new Vector3((JSONArray) jsonData.get("Pos"));
                 sender.sendMessage(utils.colored("Position: "+pos.intXYZ().toStringColored()));
