@@ -28,6 +28,7 @@ public class Messages {
         Text hoverTxt = new Text("Click to copy");
         HoverEvent hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hoverTxt);
         msg.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, copyText));
+        msg.setHoverEvent(hoverEvent);
         sender.spigot().sendMessage(msg);
     }
     public void clickSuggest(CommandSender sender, String message, String command){
