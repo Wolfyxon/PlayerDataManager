@@ -1,31 +1,34 @@
 package com.wolfyxon.playerdatamgr;
 
 import com.wolfyxon.playerdatamgr.commands.*;
-
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public final class PlayerDataMgr extends JavaPlugin {
-    FileConfiguration config = getConfig();
     public Messages msgs = new Messages(this);
     public Utils utils = new Utils(this);
     public MojangAPI mojangAPI = new MojangAPI(this);
     public Map<String, Map<String,Object>> commands;
+    public FileConfiguration config;
 
     public void initConfig(){
-        config.addDefault("messages.noPermission","&cAccess denied");
+        saveDefaultConfig();
+        config = getConfig();
+    }
 
-        config.options().copyDefaults(true);
-        saveConfig();
+    public void applyConfig(){
+        utils.dateFormat = new SimpleDateFormat((String) Objects.requireNonNull(config.get("dateFormat.full")));
     }
 
     @Override
     public void onEnable() {
+        initConfig();
+        applyConfig();
         getCommand("getuuid").setExecutor(new GetUuidCommand(this));
         getCommand("getonlineuuid").setExecutor(new GetOnlineUuidCommand(this));
         getCommand("getofflineuuid").setExecutor(new GetOfflineUuidCommand(this));
@@ -33,10 +36,7 @@ public final class PlayerDataMgr extends JavaPlugin {
         getCommand("firstjoined").setExecutor(new FirstJoinedCommand(this));
         getCommand("playerdata").setExecutor(new PlayerDataCommand(this));
         commands = Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PlayerDataManager")).getDescription().getCommands();
-        initConfig();
-
         Bukkit.getConsoleSender().sendMessage(utils.colored("&aPlayerDataManager has successfully loaded"));
-
 
     }
     @Override
