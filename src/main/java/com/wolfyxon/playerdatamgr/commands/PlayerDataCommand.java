@@ -60,14 +60,12 @@ public class PlayerDataCommand implements CommandExecutor {
         String action = args[0];
         if(!actions.containsKey(action)){plugin.msgs.errorMsg(sender, "Invalid action '" + args[0] + "'. Use /playerdata help for help.");return true;}
         if(args.length<1){plugin.msgs.errorMsg(sender,"No action specified. See /playerdata help");return true;}
-        sender.sendMessage(action);
         if (action.equals("help")) {
             sender.sendMessage(utils.colored("&4&lCommands:"));
             for (Map.Entry entry : plugin.commands.entrySet()) {
                 Map<String,Object> value = (Map<String, Object>) entry.getValue();
                 sender.sendMessage(utils.colored("&2"+entry.getKey()+":&6&o "+value.get("description")));
             }
-
             sender.sendMessage(utils.colored("&4&lSub-commands"));
             sender.sendMessage(utils.colored("&aUsage: &l/playerdata <action> <username or UUID> <...>"));
             for (Map.Entry entry : actions.entrySet()) {
@@ -113,7 +111,6 @@ public class PlayerDataCommand implements CommandExecutor {
                 plr.saveData();
             }
             data = nbt.tagFromFile(filePath);
-            sender.sendMessage(String.valueOf(data.getListTag("Pos").get(1)));
             jsonData = nbt.tag2json(data);
             if (data == null) {
                 plugin.msgs.errorMsg(sender, "Failed to get playerdata file");
