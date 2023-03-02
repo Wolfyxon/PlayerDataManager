@@ -33,6 +33,20 @@ public class PlayerDataCommand implements CommandExecutor {
         utils = plugin.utils;
     }
 
+    public JSONObject fixDoubleArray(JSONObject json,String key){
+        JSONArray arr = json.getJSONArray(key);
+        json.remove(key);
+        for(int i=0; i<arr.length();i++){
+            Object v = arr.get(i);
+            if(!(v instanceof Double) || ((v instanceof Double) && (((Double)v == Math.floor((Double)v)) && !Double.isInfinite((Double)v)))){
+                arr.put(i,Double.parseDouble(String.valueOf(v))+0.0001);
+            }
+        }
+        json.put(key,arr);
+        return json;
+
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         NBTManager nbt = new NBTManager(plugin);
@@ -107,6 +121,7 @@ public class PlayerDataCommand implements CommandExecutor {
                 plr.saveData();
             }
             data = nbt.tagFromFile(filePath);
+            sender.sendMessage(String.valueOf(data.getListTag("Pos").get(1)));
             jsonData = nbt.tag2json(data);
             if (data == null) {
                 plugin.msgs.errorMsg(sender, "Failed to get playerdata file");
@@ -118,6 +133,11 @@ public class PlayerDataCommand implements CommandExecutor {
         }
         if(plr != null && !plr.isOnline()){plr = null;}
 
+        jsonData = fixDoubleArray(jsonData,"Pos");
+        jsonData = fixDoubleArray(jsonData,"Rotation");
+        jsonData = fixDoubleArray(jsonData,"Motion");
+
+        sender.sendMessage(jsonData.get("Pos").toString());
 
         switch (action) {
             case "file":
@@ -141,7 +161,9 @@ public class PlayerDataCommand implements CommandExecutor {
                             +"you want to remove only a specific part of the data.\nRepeat this command with &lconfirm&r&4 at the end to proceed."));
                 }
                 break;
-            //TODO: make a single function for saving (i wish java had nested functions)O
+            //TODO: make a single function for saving (i wish java had nested functions)
+
+
             case "clearinventory":
                 jsonData.put("Inventory",new ArrayList<>());
                 try {
