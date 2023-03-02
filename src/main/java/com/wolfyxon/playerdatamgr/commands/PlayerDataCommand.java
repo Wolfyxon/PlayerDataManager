@@ -19,10 +19,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class PlayerDataCommand implements CommandExecutor {
     PlayerDataMgr plugin;
@@ -56,6 +53,7 @@ public class PlayerDataCommand implements CommandExecutor {
         actions.put("get","Gets raw JSON data from player.");
         actions.put("reset","Completely deletes player's data. Proceed with caution.");
         actions.put("clearinventory","Clears player's inventory. Useful in fixing book/shulker bans.");
+        actions.put("clearender","Clears player's enderchest.");
         actions.put("getpos","Gets last player's coordinates.");
         actions.put("getspawn","Gets player's spawn location.");
 
@@ -64,11 +62,18 @@ public class PlayerDataCommand implements CommandExecutor {
         if(args.length<1){plugin.msgs.errorMsg(sender,"No action specified. See /playerdata help");return true;}
         sender.sendMessage(action);
         if (action.equals("help")) {
+            sender.sendMessage(utils.colored("&4&lCommands:"));
+            for (Map.Entry entry : plugin.commands.entrySet()) {
+                Map<String,Object> value = (Map<String, Object>) entry.getValue();
+                sender.sendMessage(utils.colored("&2"+entry.getKey()+":&6&o "+value.get("description")));
+            }
+
+            sender.sendMessage(utils.colored("&4&lSub-commands"));
             sender.sendMessage(utils.colored("&aUsage: &l/playerdata <action> <username or UUID> <...>"));
             for (Map.Entry entry : actions.entrySet()) {
                 String act = (String) entry.getKey();
                 String description = (String) entry.getValue();
-                sender.sendMessage(utils.colored("&2&l"+act+":&r&6 "+description));
+                sender.sendMessage(utils.colored("&2"+act+":&6&o "+description));
             }
             return true;
         }
