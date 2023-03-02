@@ -1,0 +1,5 @@
+dateFormat:
+  full: "dd.MM.yyyy hh:mm:ss"
+
+messages:
+  noPermission: "&cAccess denied"
