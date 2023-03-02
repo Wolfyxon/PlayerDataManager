@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -76,6 +77,8 @@ public class PlayerDataCommand implements CommandExecutor {
         String filePath = null;
         CompoundTag data = null;
         JSONObject jsonData = null;
+        Player plr = null;
+        //TODO: fix net.querz.nbt.io.ParseException
         if (args.length > 1) {
             usernameOrUUID = args[1];
             if (utils.strIsUUID(usernameOrUUID)) {
@@ -99,6 +102,10 @@ public class PlayerDataCommand implements CommandExecutor {
                 plugin.msgs.errorMsg(sender, "Player data file not found for this user.");
                 return true;
             }
+            plr = Bukkit.getPlayer(uuid);
+            if(plr!=null && plr.isOnline()){
+                plr.saveData();
+            }
             data = nbt.tagFromFile(filePath);
             jsonData = nbt.tag2json(data);
             if (data == null) {
@@ -109,6 +116,8 @@ public class PlayerDataCommand implements CommandExecutor {
             plugin.msgs.errorMsg(sender, "Please specify player username or UUID after specified action");
             return true;
         }
+        if(plr != null && !plr.isOnline()){plr = null;}
+
 
         switch (action) {
             case "file":
@@ -132,7 +141,7 @@ public class PlayerDataCommand implements CommandExecutor {
                             +"you want to remove only a specific part of the data.\nRepeat this command with &lconfirm&r&4 at the end to proceed."));
                 }
                 break;
-            //TODO: make a single function for saving (i wish java had nested functions)
+            //TODO: make a single function for saving (i wish java had nested functions)O
             case "clearinventory":
                 jsonData.put("Inventory",new ArrayList<>());
                 try {
@@ -143,6 +152,7 @@ public class PlayerDataCommand implements CommandExecutor {
                     e.printStackTrace();
                     plugin.msgs.errorMsg(sender,"An error occurred.");
                 }
+                if(plr!=null){plr.loadData();}
                 break;
             case "clearender":
                 jsonData.put("EnderItems",new ArrayList<>());
@@ -154,6 +164,7 @@ public class PlayerDataCommand implements CommandExecutor {
                     e.printStackTrace();
                     plugin.msgs.errorMsg(sender,"An error occurred.");
                 }
+                if(plr!=null){plr.loadData();}
                 break;
             case "getpos":
                 Vector3 pos = new Vector3((JSONArray) jsonData.get("Pos"));
