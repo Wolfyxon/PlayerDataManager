@@ -91,3 +91,7 @@ Permission: `playerdatamgr.commands.seen`
 Shows the date of the first time a player has joined.   
 Usage: `/firstjoined <username>`  
 Permission: `playerdatamgr.commands.firstjoined`
+
+# Used libraries
+- JSON: https://mvnrepository.com/artifact/org.json/json
+- NBT: https://github.com/Querz/NBT
