@@ -35,11 +35,11 @@ public class GetOnlineUuidCommand implements CommandExecutor {
         String username = args[0];
         OfflinePlayer offlinePlr = Bukkit.getOfflinePlayer(username);
         if(!plugin.mojangAPI.isUUIDCachedForUsername(username)){
-            plugin.msgs.sendID(sender,"messages.apiConnecting");
+            plugin.msgs.sendID(sender,"apiConnecting");
         }
         UUID tmpUUID = utils.getOnlineUUID(username);
         if (tmpUUID == null) {
-            plugin.msgs.sendID(sender,"messages.error.api.playerCantGet");
+            plugin.msgs.sendID(sender,"error.api.playerCantGet");
             if(!Bukkit.getServer().getOnlineMode()){
                 sender.sendMessage(utils.colored("&6WARNING: Server is in offline mode, consider using &l/offlineuuid"));
             }
