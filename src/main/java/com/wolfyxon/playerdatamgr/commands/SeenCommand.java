@@ -26,7 +26,7 @@ public class SeenCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(args.length < 1){
-            plugin.msgs.errorMsg(sender,"No player username or UUID specified.");
+            plugin.msgs.sendID(sender,"messages.error.playerUnspecified");
             return true;
         }
         

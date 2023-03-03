@@ -2,6 +2,8 @@ package com.wolfyxon.playerdatamgr;
 
 import com.wolfyxon.playerdatamgr.commands.*;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,12 +31,32 @@ public final class PlayerDataMgr extends JavaPlugin {
     public void onEnable() {
         initConfig();
         applyConfig();
-        getCommand("getuuid").setExecutor(new GetUuidCommand(this));
-        getCommand("getonlineuuid").setExecutor(new GetOnlineUuidCommand(this));
-        getCommand("getofflineuuid").setExecutor(new GetOfflineUuidCommand(this));
-        getCommand("seen").setExecutor(new SeenCommand(this));
-        getCommand("firstjoined").setExecutor(new FirstJoinedCommand(this));
-        getCommand("playerdata").setExecutor(new PlayerDataCommand(this));
+
+        //Command classes
+        GetUuidCommand getUUIDclass = new GetUuidCommand(this);
+        GetOnlineUuidCommand getOnlineUUIDclass = new GetOnlineUuidCommand(this);
+        GetOfflineUuidCommand getOfflineUUIDclass = new GetOfflineUuidCommand(this);
+        SeenCommand seenClass = new SeenCommand(this);
+        FirstJoinedCommand firstJoinedClass = new FirstJoinedCommand(this);
+        PlayerDataCommand playerDataClass = new PlayerDataCommand(this);
+        //Commands
+        PluginCommand getUUIDcmd = getCommand("getuuid");
+        PluginCommand getonlineUUIDcmd = getCommand("getofflineuuid");
+        PluginCommand getOfflineUUIDcmd = getCommand("getofflineuuid");
+        PluginCommand seenCmd = getCommand("seen");
+        PluginCommand firstJoinedCmd = getCommand("firstjoined");
+        PluginCommand playerdataCmd = getCommand("playerdata");
+        //Executors
+        getUUIDcmd.setExecutor(getUUIDclass);
+        getonlineUUIDcmd.setExecutor(getOnlineUUIDclass);
+        getOfflineUUIDcmd.setExecutor(getOfflineUUIDclass);
+        seenCmd.setExecutor(seenClass);
+        firstJoinedCmd.setExecutor(firstJoinedClass);
+        playerdataCmd.setExecutor(playerDataClass);
+        //Tab completers
+        playerdataCmd.setTabCompleter(playerDataClass);
+
+
         commands = Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PlayerDataManager")).getDescription().getCommands();
         Bukkit.getConsoleSender().sendMessage(utils.colored("&aPlayerDataManager has successfully loaded"));
 
