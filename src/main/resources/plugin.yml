@@ -3,7 +3,7 @@ version: '${project.version}'
 main: com.wolfyxon.playerdatamgr.PlayerDataMgr
 api-version: 1.19
 authors: [ Wolfyxon ]
-description: All in one plugin for checking and managing players' data even if they are not online. Useful on non-premium servers and with shulker/book bans
+description: All in one plugin for checking and managing players' data even if they are not online. Useful on cracked servers (which I don't recommend) and with fixing shulker/book bans
 commands:
   playerdata:
     description: Main command. Used for reading, modyfying and removing data
