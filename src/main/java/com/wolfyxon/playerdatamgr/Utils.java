@@ -3,6 +3,8 @@ package com.wolfyxon.playerdatamgr;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -24,6 +26,17 @@ public class Utils {
         dimensions.put(-1,"minecraft:nether");
         dimensions.put(-1,"minecraft:overworld");
         dimensions.put(1,"minecraft:the_end");
+    }
+    String permissionPrefix = "playerdatamgr.";
+    public boolean hasPermission(CommandSender sender,String permission){
+        return sender.hasPermission(permissionPrefix+permission);
+    }
+    public boolean alertPermission(CommandSender sender,String permission){
+        if(sender instanceof ConsoleCommandSender){return true;}
+        if(sender.isOp()){return true;}
+        boolean has = hasPermission(sender,permission);
+        if (!has){plugin.msgs.sendID(sender,"error.noPermission");}
+        return has;
     }
 
     public String dateFormat(Date date){
