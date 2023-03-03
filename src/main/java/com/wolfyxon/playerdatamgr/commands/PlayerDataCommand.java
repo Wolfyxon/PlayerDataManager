@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,7 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class PlayerDataCommand implements CommandExecutor {
+public class PlayerDataCommand implements CommandExecutor, TabCompleter {
     PlayerDataMgr plugin;
     Utils utils;
 
@@ -89,7 +90,7 @@ public class PlayerDataCommand implements CommandExecutor {
                 uuid = UUID.fromString(usernameOrUUID);
             } else {
                 if (Bukkit.getServer().getOnlineMode() && !plugin.mojangAPI.isUUIDCachedForUsername(usernameOrUUID)) {
-                    sender.sendMessage(utils.colored("&7Querying MojangAPI, please wait..."));
+                    plugin.msgs.sendID(sender,"messages.apiConnecting");
                 }
                 uuid = utils.getUUID(usernameOrUUID);
                 if (uuid == null && Bukkit.getServer().getOnlineMode()) {
@@ -117,7 +118,7 @@ public class PlayerDataCommand implements CommandExecutor {
                 return true;
             }
         } else {
-            plugin.msgs.errorMsg(sender, "Please specify player username or UUID after specified action");
+            plugin.msgs.sendID(sender,"messages.error.playerUnspecified");
             return true;
         }
         if(plr != null && !plr.isOnline()){plr = null;}
@@ -198,4 +199,8 @@ public class PlayerDataCommand implements CommandExecutor {
         return true;
     }
 
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        return null;
+    }
 }

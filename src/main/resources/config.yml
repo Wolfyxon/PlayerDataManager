@@ -1,5 +1,15 @@
 dateFormat:
-  full: "dd.MM.yyyy hh:mm:ss"
+  full: "dd.MM.yyyy hh:mm:ss" # see https://www.w3schools.com/java/java_date.asp
 
 messages:
-  noPermission: "&cAccess denied"
+  # Please avoid modifying the messages too much (especially the errors) so they can be understood by you and other admins
+  # To disable a message leave a blank "" (avoid doing this)
+  apiConnecting: "&7Querying MojangAPI, please wait..."
+  error:
+    api:
+      playerCantGet: "Player not found in the Mojang API or no internet connection."
+    general: "&cAn error occurred."
+    playerCantGet: "&cFailed to get player."
+    playerUnspecified: "&cNo player username or UUID specified."
+    plauerUsernameUnspecified: "&cNo player username specified."
+    noPermission: "&cAccess denied."

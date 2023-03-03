@@ -12,8 +12,11 @@ public class Messages {
     PlayerDataMgr plugin;
     public Messages(PlayerDataMgr main){plugin = main;}
 
-    public void sendFromConfig(CommandSender sender,String messageID){
-        sender.sendMessage(plugin.utils.colored((String) plugin.config.get("messages."+messageID)));
+    public String getMsg(String messageID){
+        return plugin.utils.colored((String) plugin.config.get("messages."+messageID));
+    }
+    public void sendID(CommandSender sender,String messageID){
+        sender.sendMessage(getMsg(messageID));
     }
 
     public void errorMsg(CommandSender sender,String message){
