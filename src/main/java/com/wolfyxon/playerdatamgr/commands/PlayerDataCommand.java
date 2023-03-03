@@ -26,11 +26,19 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
     PlayerDataMgr plugin;
     Utils utils;
 
+    Map<String, String> actions = new HashMap<String, String>();
     public PlayerDataCommand(PlayerDataMgr main) {
         plugin = main;
         utils = plugin.utils;
+        actions.put("help","Lists all actions and their usage");
+        actions.put("file","Gets playerdata .dat file path.");
+        actions.put("get","Gets raw JSON data from player.");
+        actions.put("reset","Completely deletes player's data. Proceed with caution.");
+        actions.put("clearinventory","Clears player's inventory. Useful in fixing book/shulker bans.");
+        actions.put("clearender","Clears player's enderchest.");
+        actions.put("getpos","Gets last player's coordinates.");
+        actions.put("getspawn","Gets player's spawn location.");
     }
-
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -48,15 +56,6 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         }
 
         //TODO: multiworld support
-        Map<String, String> actions = new HashMap<String, String>();
-        actions.put("help","Lists all actions and their usage");
-        actions.put("file","Gets playerdata .dat file path.");
-        actions.put("get","Gets raw JSON data from player.");
-        actions.put("reset","Completely deletes player's data. Proceed with caution.");
-        actions.put("clearinventory","Clears player's inventory. Useful in fixing book/shulker bans.");
-        actions.put("clearender","Clears player's enderchest.");
-        actions.put("getpos","Gets last player's coordinates.");
-        actions.put("getspawn","Gets player's spawn location.");
 
         String action = args[0];
         if(!actions.containsKey(action)){plugin.msgs.errorMsg(sender, "Invalid action '" + args[0] + "'. Use /playerdata help for help.");return true;}
