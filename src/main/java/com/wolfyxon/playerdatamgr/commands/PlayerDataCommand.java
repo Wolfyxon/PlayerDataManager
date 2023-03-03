@@ -139,8 +139,9 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 plugin.msgs.clickCopy(sender,"&1Path: &r"+filePath,filePath);
                 break;
             case "get":
-                JSONObject json = nbt.tag2json(data);
-                sender.sendMessage(utils.prettyJSON(json));
+                String strJson = utils.prettyJSON(jsonData);
+                sender.sendMessage(strJson);
+                plugin.msgs.clickCopy(sender,utils.colored("&2&lClick to copy"),strJson);
                 break;
             case "reset":
                 if(args.length > 2 && args[2].equals("confirm")){
