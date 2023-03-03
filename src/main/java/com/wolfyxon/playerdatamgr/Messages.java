@@ -16,7 +16,9 @@ public class Messages {
         return plugin.utils.colored((String) plugin.config.get("messages."+messageID));
     }
     public void sendID(CommandSender sender,String messageID){
-        sender.sendMessage(getMsg(messageID));
+        String msg = getMsg(messageID);
+        if(msg.equals("")){return;}
+        sender.sendMessage(msg);
     }
 
     public void errorMsg(CommandSender sender,String message){
