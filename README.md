@@ -12,6 +12,7 @@ JARs will be able to download when plugin exits the very early stage.
 Report bugs [here](https://github.com/Wolfyxon/PlayerDataManager/issues).
 
 ## Commands & their permissions
+All player commands do not require the player to be online.
 ### /playerdata
 Main plugin command.
 
