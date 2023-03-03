@@ -89,7 +89,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 uuid = UUID.fromString(usernameOrUUID);
             } else {
                 if (Bukkit.getServer().getOnlineMode() && !plugin.mojangAPI.isUUIDCachedForUsername(usernameOrUUID)) {
-                    plugin.msgs.sendID(sender,"messages.apiConnecting");
+                    plugin.msgs.sendID(sender,"apiConnecting");
                 }
                 uuid = utils.getUUID(usernameOrUUID);
                 if (uuid == null && Bukkit.getServer().getOnlineMode()) {
@@ -117,7 +117,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 return true;
             }
         } else {
-            plugin.msgs.sendID(sender,"messages.error.playerUnspecified");
+            plugin.msgs.sendID(sender,"error.playerUnspecified");
             return true;
         }
         if(plr != null && !plr.isOnline()){plr = null;}
