@@ -16,7 +16,8 @@ Report bugs [here](https://github.com/Wolfyxon/PlayerDataManager/issues).
 Main plugin command.
 
 Usage: `/playerdata [sub-command] [username/UUID] [additional args...] `
-#### Sub-commands
+<details>
+  <summary>Sub-commands</summary>
 ##### Help
 Lists plugin commands and sub-commands of **/playerdata**.
 
@@ -64,3 +65,4 @@ Clears player's enderchest.
 
 Usage: `/playerdata clearender <username or UUID>`  
 Permission: `playerdatamgr.commands.main.clearender`
+</details?
