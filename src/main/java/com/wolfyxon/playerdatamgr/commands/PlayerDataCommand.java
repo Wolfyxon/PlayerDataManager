@@ -27,6 +27,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
     Utils utils;
 
     Map<String, String> actions = new HashMap<String, String>();
+    String[] nonPlayerActions= {"help"};
     public PlayerDataCommand(PlayerDataMgr main) {
         plugin = main;
         utils = plugin.utils;
@@ -60,18 +61,23 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         String action = args[0];
         if(!actions.containsKey(action)){plugin.msgs.errorMsg(sender, "Invalid action '" + args[0] + "'. Use /playerdata help for help.");return true;}
         if(args.length<1){plugin.msgs.errorMsg(sender,"No action specified. See /playerdata help");return true;}
-        if (action.equals("help")) {
-            sender.sendMessage(utils.colored("&4&lCommands:"));
-            for (Map.Entry entry : plugin.commands.entrySet()) {
-                Map<String,Object> value = (Map<String, Object>) entry.getValue();
-                sender.sendMessage(utils.colored("&2"+entry.getKey()+":&6&o "+value.get("description")));
-            }
-            sender.sendMessage(utils.colored("&4&lSub-commands"));
-            sender.sendMessage(utils.colored("&aUsage: &l/playerdata <action> <username or UUID> <...>"));
-            for (Map.Entry entry : actions.entrySet()) {
-                String act = (String) entry.getKey();
-                String description = (String) entry.getValue();
-                sender.sendMessage(utils.colored("&2"+act+":&6&o "+description));
+        if(Arrays.stream(nonPlayerActions).anyMatch(action::equals)){
+            switch (action){
+                case "help":
+                    sender.sendMessage(utils.colored("&4&lCommands:"));
+                    for (Map.Entry entry : plugin.commands.entrySet()) {
+                        Map<String,Object> value = (Map<String, Object>) entry.getValue();
+                        sender.sendMessage(utils.colored("&2"+entry.getKey()+":&6&o "+value.get("description")));
+                    }
+                    sender.sendMessage(utils.colored("&4&lSub-commands"));
+                    sender.sendMessage(utils.colored("&aUsage: &l/playerdata <action> <username or UUID> <...>"));
+                    for (Map.Entry entry : actions.entrySet()) {
+                        String act = (String) entry.getKey();
+                        String description = (String) entry.getValue();
+                        sender.sendMessage(utils.colored("&2"+act+":&6&o "+description));
+                    }
+                    break;
+
             }
             return true;
         }
@@ -82,7 +88,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         CompoundTag data = null;
         JSONObject jsonData = null;
         Player plr = null;
-        //TODO: fix net.querz.nbt.io.ParseException
+
         if (args.length > 1) {
             usernameOrUUID = args[1];
             if (utils.strIsUUID(usernameOrUUID)) {
@@ -208,8 +214,11 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
             for (int i = 0; i < actionArr.length; i++) {
                 usage.add((String) actionArr[i]);
             }
+            return usage;
         }
-        if (args.length == 2){
+        String action = args[1];
+        if (args.length == 2 && !Arrays.stream(nonPlayerActions).anyMatch(action::equals)){
+            sender.sendMessage(action);
             Object[] players = Bukkit.getOnlinePlayers().toArray();
             for (int i = 0; i < players.length; i++) {
                 Player plr = (Player) players[i];
