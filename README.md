@@ -65,4 +65,29 @@ Clears player's enderchest.
 
 Usage: `/playerdata clearender <username or UUID>`  
 Permission: `playerdatamgr.commands.main.clearender`
-</details?
+</details>
+
+### UUID
+Automatically player's gets online UUID from MojangAPI or generates if the server is in offline mode.  
+Usage: `/uuid <username>`  
+Permission: `playerdatamgr.commands.uuid`
+
+### OnlineUUID
+Gets player's UUID from MojangAPI.  
+Usage: `/onlineuuid <username>`  
+Permission: `playerdatamgr.commands.uuid`
+
+### OfflineUUID
+Generates an offline UUID.  
+Usage: `/offlineuuid <username>`  
+Permission: `playerdatamgr.commands.uuid`
+
+### Seen
+Shows the last date a player was online.  
+Usage: `/seen <username>`  
+Permission: `playerdatamgr.commands.seen`
+
+### FirstPlayed
+Shows the date of the first time a player has joined.   
+Usage: `/firstjoined <username>`  
+Permission: `playerdatamgr.commands.firstjoined`
