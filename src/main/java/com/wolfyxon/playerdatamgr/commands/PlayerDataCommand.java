@@ -200,6 +200,23 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        return null;
+        if( !(sender instanceof Player) ){return null;}
+        List<String> usage = new ArrayList<>();
+
+        if(args.length == 1) {
+            Object[] actionArr = actions.keySet().toArray();
+            for (int i = 0; i < actionArr.length; i++) {
+                usage.add((String) actionArr[i]);
+            }
+        }
+        if (args.length == 2){
+            Object[] players = Bukkit.getOnlinePlayers().toArray();
+            for (int i = 0; i < players.length; i++) {
+                Player plr = (Player) players[i];
+                usage.add(plr.getName());
+            }
+        }
+
+        return usage;
     }
 }
