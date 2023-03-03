@@ -1,10 +1,15 @@
 package com.wolfyxon.playerdatamgr;
 
+import net.querz.nbt.tag.CompoundTag;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -113,7 +118,18 @@ public class Utils {
         }
         return null;
     }
+    public static class ItemUtils {
+        public static ItemStack tag2item(CompoundTag tag){
+            //TODO: this
+            JSONObject json = NBTManager.tag2json(tag);
+            Material m = Material.getMaterial(json.getString("id"));
+            ItemStack stack = Bukkit.getItemFactory().createItemStack(m.name());
+            stack.setAmount(json.getInt("Count"));
 
+
+            return stack;
+        }
+    }
 
     public class FileUtils {
         public boolean isPathSafe(String strPath,String base) {
