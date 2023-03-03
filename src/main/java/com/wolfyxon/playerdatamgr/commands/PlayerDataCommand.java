@@ -28,6 +28,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
 
     Map<String, String> actions = new HashMap<String, String>();
     String[] nonPlayerActions= {"help"};
+    String permPrefix = "commands.main.";
     public PlayerDataCommand(PlayerDataMgr main) {
         plugin = main;
         utils = plugin.utils;
@@ -60,6 +61,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
 
         String action = args[0];
         if(!actions.containsKey(action)){plugin.msgs.errorMsg(sender, "Invalid action '" + args[0] + "'. Use /playerdata help for help.");return true;}
+        if(!utils.alertPermission(sender, permPrefix+action)){return true;}
         if(args.length<1){plugin.msgs.errorMsg(sender,"No action specified. See /playerdata help");return true;}
         if(Arrays.stream(nonPlayerActions).anyMatch(action::equals)){
             switch (action){
@@ -212,7 +214,10 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         if(args.length == 1) {
             Object[] actionArr = actions.keySet().toArray();
             for (int i = 0; i < actionArr.length; i++) {
-                usage.add((String) actionArr[i]);
+                String action = (String) actionArr[i];
+                if(utils.hasPermission(sender,permPrefix+action)) {
+                    usage.add(action);
+                }
             }
             return usage;
         }
