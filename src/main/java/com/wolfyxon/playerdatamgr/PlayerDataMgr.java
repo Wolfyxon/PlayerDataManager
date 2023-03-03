@@ -1,10 +1,11 @@
 package com.wolfyxon.playerdatamgr;
 
 import com.wolfyxon.playerdatamgr.commands.*;
+import com.wolfyxon.playerdatamgr.guis.inventoryEditGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.text.SimpleDateFormat;
@@ -15,8 +16,10 @@ public final class PlayerDataMgr extends JavaPlugin {
     public Messages msgs = new Messages(this);
     public Utils utils = new Utils(this);
     public MojangAPI mojangAPI = new MojangAPI(this);
+    public inventoryEditGUI inventoryEditGUI = new inventoryEditGUI();
     public Map<String, Map<String,Object>> commands;
     public FileConfiguration config;
+    public Plugin plugin;
 
     public void initConfig(){
         saveDefaultConfig();
@@ -29,6 +32,7 @@ public final class PlayerDataMgr extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        plugin = Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PlayerDataManager"));
         initConfig();
         applyConfig();
 
@@ -57,7 +61,9 @@ public final class PlayerDataMgr extends JavaPlugin {
         playerdataCmd.setTabCompleter(playerDataClass);
 
 
-        commands = Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("PlayerDataManager")).getDescription().getCommands();
+        Bukkit.getPluginManager().registerEvents(inventoryEditGUI,plugin);
+
+        commands = plugin.getDescription().getCommands();
         Bukkit.getConsoleSender().sendMessage(utils.colored("&aPlayerDataManager has successfully loaded"));
 
     }

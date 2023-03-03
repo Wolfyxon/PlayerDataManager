@@ -38,6 +38,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         actions.put("reset","Completely deletes player's data. Proceed with caution.");
         actions.put("clearinventory","Clears player's inventory. Useful in fixing book/shulker bans.");
         actions.put("clearender","Clears player's enderchest.");
+        actions.put("editinventory","Opens a GUI to edit player's inventory.");
         actions.put("getpos","Gets last player's coordinates.");
         actions.put("getspawn","Gets player's spawn location.");
     }
@@ -191,6 +192,11 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(utils.colored("Dimension: &2"+dimension));
                 plugin.msgs.clickSuggest(sender,"&9&lTeleport","/execute in "+dimension+" run tp @s "+pos.toString());
                 break;
+
+            case "editinventory":
+                plugin.inventoryEditGUI.open((Player) sender);
+                break;
+
             case "getspawn":
                 if( !(jsonData.has("SpawnX") && jsonData.has("SpawnY") && jsonData.has("SpawnZ") ) ){
                     plugin.msgs.errorMsg(sender,"This player has no spawn set.");
