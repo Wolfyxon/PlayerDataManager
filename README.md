@@ -1,7 +1,6 @@
 # PlayerData Manager
 A simple Minecraft Spigot plugin for managing players' data. Useful in fixing book/shulker bans.
 It even works if the player is not currently playing.
-## Info
 ### Supported versions
 `1.19` `1.19.1` `1.19.2` `1.19.3`
 
