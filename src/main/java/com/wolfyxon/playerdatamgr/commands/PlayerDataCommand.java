@@ -38,7 +38,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         actions.put("reset","Completely deletes player's data. Proceed with caution.");
         actions.put("clearinventory","Clears player's inventory. Useful in fixing book/shulker bans.");
         actions.put("clearender","Clears player's enderchest.");
-        actions.put("editinventory","Opens a GUI to edit player's inventory.");
+        //actions.put("editinventory","Opens a GUI to edit player's inventory.");
         actions.put("getpos","Gets last player's coordinates.");
         actions.put("getspawn","Gets player's spawn location.");
     }
