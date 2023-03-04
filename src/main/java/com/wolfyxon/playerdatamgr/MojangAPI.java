@@ -59,6 +59,9 @@ public class MojangAPI {
 
     public Map<String, JSONObject> profileCache = new HashMap<String, JSONObject>();
 
+    public void clearCache(){
+        profileCache = new HashMap<String, JSONObject>();
+    }
     public boolean isProfileCached(String username){
         return profileCache.containsKey(username);
     }
