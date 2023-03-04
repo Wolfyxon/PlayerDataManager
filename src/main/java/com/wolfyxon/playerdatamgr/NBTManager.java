@@ -14,6 +14,7 @@ public class NBTManager {
     public NBTManager(PlayerDataMgr main){plugin=main;utils=plugin.utils;}
 
     public static JSONObject fixDoubleArray(JSONObject json,String key){
+        if(!json.has(key)) return json;
         JSONArray arr = json.getJSONArray(key);
         json.remove(key);
         for(int i=0; i<arr.length();i++){

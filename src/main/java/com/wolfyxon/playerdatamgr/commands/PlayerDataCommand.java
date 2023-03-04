@@ -26,6 +26,15 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
     PlayerDataMgr plugin;
     Utils utils;
 
+
+    private void save(JSONObject data,String path) {
+        try {
+            NBTUtil.write((CompoundTag) SNBTUtil.fromSNBT(data.toString()), new File(path));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     Map<String, String> actions = new HashMap<String, String>();
     String[] nonPlayerActions= {"help"};
     String permPrefix = "commands.main.";
@@ -134,6 +143,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         jsonData = nbt.fixDoubleArray(jsonData,"Pos");
         jsonData = nbt.fixDoubleArray(jsonData,"Rotation");
         jsonData = nbt.fixDoubleArray(jsonData,"Motion");
+        jsonData = nbt.fixDoubleArray(jsonData,"Paper.Origin");
 
         switch (action) {
             case "file":
@@ -163,26 +173,14 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
 
             case "clearinventory":
                 jsonData.put("Inventory",new ArrayList<>());
-                try {
-                    data = (CompoundTag) SNBTUtil.fromSNBT(jsonData.toString());
-                    NBTUtil.write(data,new File(filePath));
-                    sender.sendMessage(utils.colored("&6Inventory has been cleared."));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    plugin.msgs.errorMsg(sender,"An error occurred.");
-                }
+                save(jsonData,filePath);
+                sender.sendMessage(utils.colored("&6Inventory has been cleared."));
                 if(plr!=null){plr.loadData();}
                 break;
             case "clearender":
                 jsonData.put("EnderItems",new ArrayList<>());
-                try {
-                    data = (CompoundTag) SNBTUtil.fromSNBT(jsonData.toString());
-                    NBTUtil.write(data,new File(filePath));
-                    sender.sendMessage(utils.colored("&Enderchest has been cleared."));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    plugin.msgs.errorMsg(sender,"An error occurred.");
-                }
+                save(jsonData,filePath);
+                sender.sendMessage(utils.colored("&Enderchest has been cleared."));
                 if(plr!=null){plr.loadData();}
                 break;
             case "getpos":
