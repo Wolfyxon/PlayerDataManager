@@ -57,7 +57,16 @@ public class MojangAPI {
         return res;
     }////////////////////////////////////
 
-    public JSONObject getUserProfile(String username) {
+    public Map<String, JSONObject> profileCache = new HashMap<String, JSONObject>();
+
+    public boolean isProfileCached(String username){
+        return profileCache.containsKey(username);
+    }
+    public JSONObject getCachedProfile(String username){
+        if(!isProfileCached(username)) return null;
+        return profileCache.get(username);
+    }
+    public JSONObject getUserProfileFromAPI(String username) {
         String raw = httpRequest("https://api.mojang.com/users/profiles/minecraft/" + username);
         if (raw == null) {return null;}
         try {
@@ -68,27 +77,20 @@ public class MojangAPI {
             return null;
         }
     }
-
-    public Map<String, UUID> UUIDcache = new HashMap<String, UUID>();
-
-    public UUID getCachedUUID(String username){
-        return UUIDcache.get(username);
-    }
-    public boolean isUUIDCachedForUsername(String username){
-        return (getCachedUUID(username) != null);
+    public JSONObject getUserProfile(String username){
+        JSONObject cached = getCachedProfile(username);
+        if(cached != null) return cached;
+        JSONObject online = getUserProfileFromAPI(username);
+        if(online != null) profileCache.put(username,online);
+        return online;
     }
 
     public UUID getOnlineUUID(String username){
-        if(UUIDcache.containsKey(username)){
-            return (UUID) UUIDcache.get(username);
-        }
         JSONObject json = getUserProfile(username);
         if(json==null){return null;}
         String strUUID = (String) json.get("id");
         if(strUUID==null){return null;}
-        UUID uuid = utils.str2uuid(strUUID);
-        UUIDcache.put(username,uuid);
-        return uuid;
+        return utils.str2uuid(strUUID);
     }
 
 

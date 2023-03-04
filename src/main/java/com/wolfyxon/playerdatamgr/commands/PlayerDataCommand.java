@@ -106,7 +106,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
             if (utils.strIsUUID(usernameOrUUID)) {
                 uuid = UUID.fromString(usernameOrUUID);
             } else {
-                if (Bukkit.getServer().getOnlineMode() && !plugin.mojangAPI.isUUIDCachedForUsername(usernameOrUUID)) {
+                if (Bukkit.getServer().getOnlineMode() && !plugin.mojangAPI.isProfileCached(usernameOrUUID)) {
                     plugin.msgs.sendID(sender,"apiConnecting");
                 }
                 uuid = utils.getUUID(usernameOrUUID);
