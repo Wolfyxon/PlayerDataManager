@@ -47,10 +47,6 @@ public class GetOnlineUuidCommand implements CommandExecutor {
         }
         uuid = tmpUUID;
 
-        if (uuid == null) {
-            plugin.msgs.errorMsg(sender, "UUID==null. This is a bug, please report!");
-            return true;
-        }
         String strUUID = uuid.toString();
         if (strUUID == null) {
             plugin.msgs.errorMsg(sender, "strUUID==null. This is a bug, please report!");
