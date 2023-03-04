@@ -45,7 +45,7 @@ public final class PlayerDataMgr extends JavaPlugin {
         PlayerDataCommand playerDataClass = new PlayerDataCommand(this);
         //Commands
         PluginCommand getUUIDcmd = getCommand("getuuid");
-        PluginCommand getonlineUUIDcmd = getCommand("getofflineuuid");
+        PluginCommand getonlineUUIDcmd = getCommand("getonlineuuid");
         PluginCommand getOfflineUUIDcmd = getCommand("getofflineuuid");
         PluginCommand seenCmd = getCommand("seen");
         PluginCommand firstJoinedCmd = getCommand("firstjoined");
