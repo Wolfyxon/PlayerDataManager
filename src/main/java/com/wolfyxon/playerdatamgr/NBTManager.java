@@ -41,6 +41,17 @@ public class NBTManager {
             return null;
         }
     }
+    public boolean copyData(String fromPath, String toPath){
+        CompoundTag tag = Objects.requireNonNull(tagFromFile(fromPath));
+        try {
+            NBTUtil.write(tag, new File(toPath));
+            return true;
+        } catch (IOException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean swapData(String pathA, String pathB){
         CompoundTag tagA = Objects.requireNonNull(tagFromFile(pathA));
         CompoundTag tagB = Objects.requireNonNull(tagFromFile(pathB));
