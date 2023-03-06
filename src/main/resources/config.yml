@@ -8,7 +8,7 @@ messages:
   error:
     api:
       playerCantGet: "Player not found in the Mojang API or no internet connection."
-    general: "&cAn error occurred."
+    general: "&cAn error occurred. See console for details."
     playerCantGet: "&cFailed to get player."
     playerUnspecified: "&cNo player username or UUID specified."
     plauerUsernameUnspecified: "&cNo player username specified."
