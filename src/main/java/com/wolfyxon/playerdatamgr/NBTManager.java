@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class NBTManager {
     PlayerDataMgr plugin;
@@ -38,6 +39,18 @@ public class NBTManager {
         } catch (IOException e){
             e.printStackTrace();
             return null;
+        }
+    }
+    public boolean swapData(String pathA, String pathB){
+        CompoundTag tagA = Objects.requireNonNull(tagFromFile(pathA));
+        CompoundTag tagB = Objects.requireNonNull(tagFromFile(pathB));
+        try {
+            NBTUtil.write(tagA, new File(pathB));
+            NBTUtil.write(tagB, new File(pathA));
+            return true;
+        } catch (IOException e){
+            e.printStackTrace();
+            return false;
         }
     }
 
