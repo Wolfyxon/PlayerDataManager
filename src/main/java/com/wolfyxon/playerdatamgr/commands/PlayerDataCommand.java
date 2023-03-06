@@ -138,7 +138,9 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
 
         if (args.length > 1) {
             uuid = getUUID(args[1],sender);
+            if(uuid == null) return true;
             filePath = getFilePath(uuid,sender);
+            if(filePath == null) return true;
             plr = Bukkit.getPlayer(uuid);
             if(plr!=null && plr.isOnline()){
                 plr.saveData();
