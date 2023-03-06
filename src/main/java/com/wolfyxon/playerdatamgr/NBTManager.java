@@ -42,7 +42,7 @@ public class NBTManager {
         }
     }
     public boolean copyData(String fromPath, String toPath){
-        CompoundTag tag = Objects.requireNonNull(tagFromFile(fromPath));
+        CompoundTag tag = tagFromFile(fromPath);
         try {
             NBTUtil.write(tag, new File(toPath));
             return true;
