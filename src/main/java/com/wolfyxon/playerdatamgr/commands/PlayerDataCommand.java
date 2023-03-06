@@ -82,6 +82,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         actions.put("clearinventory","Clears player's inventory. Useful in fixing book/shulker bans.");
         actions.put("clearender","Clears player's enderchest.");
         actions.put("copy","Duplicates player's A data and assigns it to player B.");
+        actions.put("transfer","Moves player's A data to player B. Proceed with caution.");
         //actions.put("editinventory","Opens a GUI to edit player's inventory.");
         actions.put("getpos","Gets last player's coordinates.");
         actions.put("getspawn","Gets player's spawn location.");
@@ -221,7 +222,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(utils.colored("Spawn position: "+spawn.toStringColored()));
                 plugin.msgs.clickSuggest(sender,"&9&lTeleport","/execute in "+spawnDimension+" run tp @s "+spawn.toString());
                 break;
-            case "copy":
+            case "copy": {
                 if(args.length < 3){
                     plugin.msgs.sendID(sender,"error.playerUnspecified");
                     sender.sendMessage(utils.colored("&2Usage:"));
@@ -237,6 +238,34 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                     sender.sendMessage(utils.colored("&aSuccessfully copied data."));
                 } else {
                     plugin.msgs.sendID(sender,"error.general");
+                }
+                break;}
+            case "transfer":
+                if(args.length < 3){
+                    plugin.msgs.sendID(sender,"error.playerUnspecified");
+                    sender.sendMessage(utils.colored("&2Usage:"));
+                    sender.sendMessage(utils.colored("&a/playerdata transfer <from player> <to player>"));
+                    sender.sendMessage(utils.colored("&7NOTE: You can use UUIDs instead of usernames."));
+                    return true;
+                }
+                if(args.length > 3 && args[3].equals("confirm")) {
+                    UUID targetUUID = getUUID(args[2], sender);
+                    if (targetUUID == null) return true;
+                    String targetPath = getFilePath(targetUUID, sender);
+                    if (targetPath == null) return true;
+                    if (nbt.copyData(filePath, targetPath)) {
+                        if (new File(filePath).delete()) {
+                            sender.sendMessage(utils.colored("&aSuccessfully moved data."));
+                        } else {
+                            plugin.msgs.sendID(sender, "error.general");
+                        }
+                    } else {
+                        plugin.msgs.sendID(sender, "error.general");
+                    }
+                } else {
+                    sender.sendMessage(utils.colored("&4You are about to COMPLETELY erase the first specified player's data including inventory, "
+                            +"achievements, XP and enderchest and move it to the 2nd player."
+                            +"\nRepeat this command with &lconfirm&r&4 at the end to proceed."));
                 }
                 break;
         }
