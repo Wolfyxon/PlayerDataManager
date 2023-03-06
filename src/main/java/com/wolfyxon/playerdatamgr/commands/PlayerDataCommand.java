@@ -56,6 +56,18 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         }
         return uuid;
     }
+    public String getFilePath(UUID uuid, CommandSender sender){
+        String filePath = NBTManager.playerdataDir + uuid.toString() + ".dat";
+        if (!utils.file.isPathSafe(filePath, NBTManager.playerdataDir)) {
+            plugin.msgs.errorMsg(sender, "Path traversal detected.");
+            return null;
+        }
+        if (!utils.file.fileExists(filePath)) {
+            plugin.msgs.errorMsg(sender, "Player data file not found for this user.");
+            return null;
+        }
+        return filePath;
+    }
 
     Map<String, String> actions = new HashMap<String, String>();
     String[] nonPlayerActions= {"help"};
@@ -126,15 +138,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
 
         if (args.length > 1) {
             uuid = getUUID(args[1],sender);
-            filePath = nbt.playerdataDir + uuid.toString() + ".dat";
-            if (!utils.file.isPathSafe(filePath, nbt.playerdataDir)) {
-                plugin.msgs.errorMsg(sender, "Path traversal detected.");
-                return true;
-            }
-            if (!utils.file.fileExists(filePath)) {
-                plugin.msgs.errorMsg(sender, "Player data file not found for this user.");
-                return true;
-            }
+            filePath = getFilePath(uuid,sender);
             plr = Bukkit.getPlayer(uuid);
             if(plr!=null && plr.isOnline()){
                 plr.saveData();
