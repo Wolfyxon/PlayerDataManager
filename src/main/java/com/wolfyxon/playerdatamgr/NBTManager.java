@@ -11,7 +11,7 @@ import java.util.Objects;
 public class NBTManager {
     PlayerDataMgr plugin;
     Utils utils;
-    public String playerdataDir = "world/playerdata/";
+    public static String playerdataDir = "world/playerdata/";
     public NBTManager(PlayerDataMgr main){plugin=main;utils=plugin.utils;}
 
     public static JSONObject fixDoubleArray(JSONObject json,String key){
