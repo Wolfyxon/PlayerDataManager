@@ -111,7 +111,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 }
                 uuid = utils.getUUID(usernameOrUUID);
                 if (uuid == null && Bukkit.getServer().getOnlineMode()) {
-                    plugin.msgs.errorMsg(sender, "Player not found in the Mojang API or no internet connection.");
+                    plugin.msgs.sendID(sender,"error.api.playerCantGet");
                     return true;
                 }
             }
