@@ -183,8 +183,6 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                             +"you want to remove only a specific part of the data.\nRepeat this command with &lconfirm&r&4 at the end to proceed."));
                 }
                 break;
-            //TODO: make a single function for saving (i wish java had nested functions)
-
 
             case "clearinventory":
                 jsonData.put("Inventory",new ArrayList<>());
