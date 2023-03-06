@@ -40,6 +40,22 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
 
         plr.loadData();
     }
+    private UUID getUUID(String usernameOrUUID,CommandSender sender){
+        UUID uuid;
+        if (utils.strIsUUID(usernameOrUUID)) {
+            uuid = UUID.fromString(usernameOrUUID);
+        } else {
+            if (Bukkit.getServer().getOnlineMode() && !plugin.mojangAPI.isProfileCached(usernameOrUUID)) {
+                plugin.msgs.sendID(sender,"apiConnecting");
+            }
+            uuid = utils.getUUID(usernameOrUUID);
+            if (uuid == null && Bukkit.getServer().getOnlineMode()) {
+                plugin.msgs.sendID(sender,"error.api.playerCantGet");
+                return null;
+            }
+        }
+        return uuid;
+    }
 
     Map<String, String> actions = new HashMap<String, String>();
     String[] nonPlayerActions= {"help"};
@@ -53,6 +69,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         actions.put("reset","Completely deletes player's data. Proceed with caution.");
         actions.put("clearinventory","Clears player's inventory. Useful in fixing book/shulker bans.");
         actions.put("clearender","Clears player's enderchest.");
+        actions.put("copy","Duplicates player's A data and assigns it to player B.");
         //actions.put("editinventory","Opens a GUI to edit player's inventory.");
         actions.put("getpos","Gets last player's coordinates.");
         actions.put("getspawn","Gets player's spawn location.");
@@ -108,19 +125,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         Player plr = null;
 
         if (args.length > 1) {
-            usernameOrUUID = args[1];
-            if (utils.strIsUUID(usernameOrUUID)) {
-                uuid = UUID.fromString(usernameOrUUID);
-            } else {
-                if (Bukkit.getServer().getOnlineMode() && !plugin.mojangAPI.isProfileCached(usernameOrUUID)) {
-                    plugin.msgs.sendID(sender,"apiConnecting");
-                }
-                uuid = utils.getUUID(usernameOrUUID);
-                if (uuid == null && Bukkit.getServer().getOnlineMode()) {
-                    plugin.msgs.sendID(sender,"error.api.playerCantGet");
-                    return true;
-                }
-            }
+            uuid = getUUID(args[1],sender);
             filePath = nbt.playerdataDir + uuid.toString() + ".dat";
             if (!utils.file.isPathSafe(filePath, nbt.playerdataDir)) {
                 plugin.msgs.errorMsg(sender, "Path traversal detected.");
@@ -211,6 +216,8 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 String spawnDimension = utils.getDimension(jsonData.get("SpawnDimension"));
                 sender.sendMessage(utils.colored("Spawn position: "+spawn.toStringColored()));
                 plugin.msgs.clickSuggest(sender,"&9&lTeleport","/execute in "+spawnDimension+" run tp @s "+spawn.toString());
+                break;
+            case "copy":
                 break;
         }
 
