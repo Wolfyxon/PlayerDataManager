@@ -34,6 +34,12 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
             e.printStackTrace();
         }
     }
+    private void reloadPlayer(Player plr){
+        if(plr == null) return;
+        if(!plr.isOnline()) return;
+
+        plr.loadData();
+    }
 
     Map<String, String> actions = new HashMap<String, String>();
     String[] nonPlayerActions= {"help"};
@@ -175,13 +181,13 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 jsonData.put("Inventory",new ArrayList<>());
                 save(jsonData,filePath);
                 sender.sendMessage(utils.colored("&6Inventory has been cleared."));
-                if(plr!=null){plr.loadData();}
+                reloadPlayer(plr);
                 break;
             case "clearender":
                 jsonData.put("EnderItems",new ArrayList<>());
                 save(jsonData,filePath);
                 sender.sendMessage(utils.colored("&Enderchest has been cleared."));
-                if(plr!=null){plr.loadData();}
+                reloadPlayer(plr);
                 break;
             case "getpos":
                 Vector3 pos = new Vector3((JSONArray) jsonData.get("Pos"));
