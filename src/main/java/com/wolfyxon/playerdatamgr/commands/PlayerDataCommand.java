@@ -222,6 +222,22 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 plugin.msgs.clickSuggest(sender,"&9&lTeleport","/execute in "+spawnDimension+" run tp @s "+spawn.toString());
                 break;
             case "copy":
+                if(args.length < 3){
+                    plugin.msgs.sendID(sender,"error.playerUnspecified");
+                    sender.sendMessage(utils.colored("&2Usage:"));
+                    sender.sendMessage(utils.colored("&a/playerdata copy <from player> <to player>"));
+                    sender.sendMessage(utils.colored("&7NOTE: You can use UUIDs instead of usernames."));
+                    return true;
+                }
+                UUID targetUUID = getUUID(args[2],sender);
+                if(targetUUID == null) return true;
+                String targetPath = getFilePath(targetUUID,sender);
+                if(targetPath == null) return true;
+                if(nbt.copyData(filePath,targetPath)){
+                    sender.sendMessage(utils.colored("&aSuccessfully copied data."));
+                } else {
+                    plugin.msgs.sendID(sender,"error.general");
+                }
                 break;
         }
 
