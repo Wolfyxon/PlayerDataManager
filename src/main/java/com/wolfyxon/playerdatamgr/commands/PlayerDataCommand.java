@@ -164,15 +164,15 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         jsonData = nbt.fixDoubleArray(jsonData,"Paper.Origin");
 
         switch (action) {
-            case "file":
+            case "file":{
                 plugin.msgs.clickCopy(sender,"&1Path: &r"+filePath,filePath);
-                break;
-            case "get":
+                break;}
+            case "get":{
                 String strJson = utils.prettyJSON(jsonData);
                 sender.sendMessage(strJson);
                 plugin.msgs.clickCopy(sender,utils.colored("&2&lClick to copy"),strJson);
-                break;
-            case "reset":
+                break;}
+            case "reset":{
                 if(args.length > 2 && args[2].equals("confirm")){
                     File f = new File(filePath);
                     if(f.delete()) {
@@ -185,33 +185,33 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                             +"achievements, XP and enderchest. Please note that you can use ex. /playerdata clearinventory or clearachievements if "
                             +"you want to remove only a specific part of the data.\nRepeat this command with &lconfirm&r&4 at the end to proceed."));
                 }
-                break;
+                break;}
 
-            case "clearinventory":
+            case "clearinventory":{
                 jsonData.put("Inventory",new ArrayList<>());
                 save(jsonData,filePath);
                 sender.sendMessage(utils.colored("&6Inventory has been cleared."));
                 reloadPlayer(plr);
-                break;
-            case "clearender":
+                break;}
+            case "clearender":{
                 jsonData.put("EnderItems",new ArrayList<>());
                 save(jsonData,filePath);
                 sender.sendMessage(utils.colored("&Enderchest has been cleared."));
                 reloadPlayer(plr);
-                break;
-            case "getpos":
+                break;}
+            case "getpos":{
                 Vector3 pos = new Vector3((JSONArray) jsonData.get("Pos"));
                 sender.sendMessage(utils.colored("Position: "+pos.intXYZ().toStringColored()));
                 String dimension = utils.getDimension(jsonData.get("Dimension"));
                 sender.sendMessage(utils.colored("Dimension: &2"+dimension));
                 plugin.msgs.clickSuggest(sender,"&9&lTeleport","/execute in "+dimension+" run tp @s "+pos.toString());
-                break;
+                break;}
 
-            case "editinventory":
+            case "editinventory":{
                 plugin.inventoryEditGUI.open((Player) sender);
-                break;
+                break;}
 
-            case "getspawn":
+            case "getspawn":{
                 if( !(jsonData.has("SpawnX") && jsonData.has("SpawnY") && jsonData.has("SpawnZ") ) ){
                     plugin.msgs.errorMsg(sender,"This player has no spawn set.");
                     return true;
@@ -221,7 +221,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 String spawnDimension = utils.getDimension(jsonData.get("SpawnDimension"));
                 sender.sendMessage(utils.colored("Spawn position: "+spawn.toStringColored()));
                 plugin.msgs.clickSuggest(sender,"&9&lTeleport","/execute in "+spawnDimension+" run tp @s "+spawn.toString());
-                break;
+                break;}
             case "copy": {
                 if(args.length < 3){
                     plugin.msgs.sendID(sender,"error.playerUnspecified");
@@ -240,7 +240,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                     plugin.msgs.sendID(sender,"error.general");
                 }
                 break;}
-            case "transfer":
+            case "transfer":{
                 if(args.length < 3){
                     plugin.msgs.sendID(sender,"error.playerUnspecified");
                     sender.sendMessage(utils.colored("&2Usage:"));
@@ -267,7 +267,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                             +"achievements, XP and enderchest and move it to the 2nd player."
                             +"\nRepeat this command with &lconfirm&r&4 at the end to proceed."));
                 }
-                break;
+                break;}
         }
 
         return true;
