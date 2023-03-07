@@ -82,7 +82,7 @@ public class Utils {
         }
     }
 
-    public boolean strArrContains(String[] array,String string){
+    public static boolean strArrContains(String[] array,String string){
         return Arrays.stream(array).anyMatch(string::equals);
     }
 
