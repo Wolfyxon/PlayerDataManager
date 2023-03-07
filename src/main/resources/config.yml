@@ -11,9 +11,10 @@ messages:
     invalid:
       uuid: "&cNot a valid UUID."
       username: "&cNot a valid username."
+    unspecified:
+      player: "&cNo player username or UUID specified."
+      username: "&cNo player username specified."
+      uuid: "&cNo player UUID specified."
     general: "&cAn error occurred. See console for details."
     playerCantGet: "&cFailed to get player."
-    playerUnspecified: "&cNo player username or UUID specified."
-    plauerUsernameUnspecified: "&cNo player username specified."
-    plauerUUIDUnspecified: "&cNo player UUID specified."
     noPermission: "&cAccess denied."
