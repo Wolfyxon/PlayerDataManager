@@ -59,6 +59,7 @@ public final class PlayerDataMgr extends JavaPlugin {
         seenCmd.setExecutor(seenClass);
         firstJoinedCmd.setExecutor(firstJoinedClass);
         playerdataCmd.setExecutor(playerDataClass);
+        uuidToUsernameCmd.setExecutor(uuidToUsernameClass);
         //Tab completers
         playerdataCmd.setTabCompleter(playerDataClass);
 
