@@ -34,3 +34,8 @@ commands:
     usage: /<command> <player>
     permission: playerdatamgr.commands.firstjoined
     aliases: [firstjoined,firstplayed]
+  uuidtousername:
+    description: Gets username from specified UUID.
+    usage: /<command> <UUID>
+    permission: playerdatamgr.commands.uuidtousername
+    aliases: [uuidtousername, uuid2username]
