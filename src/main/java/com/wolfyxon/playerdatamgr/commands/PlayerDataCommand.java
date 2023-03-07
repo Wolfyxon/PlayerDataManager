@@ -289,7 +289,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
             return usage;
         }
         String action = args[0];
-        if  ((args.length==3 && (action.equals("copy") || action.equals("transfer"))) || (args.length == 2 && !Arrays.stream(nonPlayerActions).anyMatch(action::equals)) ){
+        if  ((args.length==3 && (action.equals("copy") || action.equals("transfer"))) || (args.length == 2 && !utils.strArrContains(nonPlayerActions,action) )){
             Object[] players = Bukkit.getOnlinePlayers().toArray();
             for (int i = 0; i < players.length; i++) {
                 Player plr = (Player) players[i];
