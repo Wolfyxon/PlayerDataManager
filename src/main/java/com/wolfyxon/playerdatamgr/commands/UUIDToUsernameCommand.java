@@ -15,10 +15,12 @@ public class UUIDToUsernameCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if(args.length == 0){
+            plugin.msgs.sendID(sender,"error.unspecified.username");
             return true;
         }
         String input = args[0];
         if(!utils.strIsUUID(input)){
+            plugin.msgs.sendID(sender,"error.invalid.uuid");
             return true;
         }
         OfflinePlayer plr = Bukkit.getOfflinePlayer(utils.str2uuid(input));

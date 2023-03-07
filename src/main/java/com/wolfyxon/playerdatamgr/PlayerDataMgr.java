@@ -43,6 +43,7 @@ public final class PlayerDataMgr extends JavaPlugin {
         SeenCommand seenClass = new SeenCommand(this);
         FirstJoinedCommand firstJoinedClass = new FirstJoinedCommand(this);
         PlayerDataCommand playerDataClass = new PlayerDataCommand(this);
+        UUIDToUsernameCommand uuidToUsernameClass = new UUIDToUsernameCommand(this);
         //Commands
         PluginCommand getUUIDcmd = getCommand("getuuid");
         PluginCommand getonlineUUIDcmd = getCommand("getonlineuuid");
@@ -50,6 +51,7 @@ public final class PlayerDataMgr extends JavaPlugin {
         PluginCommand seenCmd = getCommand("seen");
         PluginCommand firstJoinedCmd = getCommand("firstjoined");
         PluginCommand playerdataCmd = getCommand("playerdata");
+        PluginCommand uuidToUsernameCmd = getCommand("uuidtousername");
         //Executors
         getUUIDcmd.setExecutor(getUUIDclass);
         getonlineUUIDcmd.setExecutor(getOnlineUUIDclass);
