@@ -12,4 +12,5 @@ messages:
     playerCantGet: "&cFailed to get player."
     playerUnspecified: "&cNo player username or UUID specified."
     plauerUsernameUnspecified: "&cNo player username specified."
+    plauerUUIDUnspecified: "&cNo player UUID specified."
     noPermission: "&cAccess denied."
