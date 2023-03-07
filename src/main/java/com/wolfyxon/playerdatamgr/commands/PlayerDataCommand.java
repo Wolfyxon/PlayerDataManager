@@ -153,7 +153,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 return true;
             }
         } else {
-            plugin.msgs.sendID(sender,"error.playerUnspecified");
+            plugin.msgs.sendID(sender,"error.unspecified.player");
             return true;
         }
         if(plr != null && !plr.isOnline()){plr = null;}
@@ -224,7 +224,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 break;}
             case "copy": {
                 if(args.length < 3){
-                    plugin.msgs.sendID(sender,"error.playerUnspecified");
+                    plugin.msgs.sendID(sender,"error.unspecified.player");
                     sender.sendMessage(utils.colored("&2Usage:"));
                     sender.sendMessage(utils.colored("&a/playerdata copy <from player> <to player>"));
                     sender.sendMessage(utils.colored("&7NOTE: You can use UUIDs instead of usernames."));
@@ -242,7 +242,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 break;}
             case "transfer":{
                 if(args.length < 3){
-                    plugin.msgs.sendID(sender,"error.playerUnspecified");
+                    plugin.msgs.sendID(sender,"error.unspecified.player");
                     sender.sendMessage(utils.colored("&2Usage:"));
                     sender.sendMessage(utils.colored("&a/playerdata transfer <from player> <to player>"));
                     sender.sendMessage(utils.colored("&7NOTE: You can use UUIDs instead of usernames."));

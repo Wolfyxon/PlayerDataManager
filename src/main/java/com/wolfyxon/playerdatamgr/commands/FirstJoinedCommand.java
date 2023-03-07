@@ -23,7 +23,7 @@ public class FirstJoinedCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length < 1) {
-            plugin.msgs.sendID(sender,"error.playerUnspecified");
+            plugin.msgs.sendID(sender,"error.unspecified.player");
             return true;
         }
         String usernameOrUUID = args[0];
