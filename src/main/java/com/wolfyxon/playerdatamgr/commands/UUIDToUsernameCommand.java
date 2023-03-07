@@ -25,7 +25,8 @@ public class UUIDToUsernameCommand implements CommandExecutor {
         }
         OfflinePlayer plr = Bukkit.getOfflinePlayer(utils.str2uuid(input));
         String username = plr.getName();
-        plugin.msgs.clickCopy(sender,"&1Username of &7"+input+"&r:\n"+username,username);
+        sender.sendMessage(utils.colored("&1Username of &7"+input+"&r:"));
+        plugin.msgs.clickCopy(sender,username,username);
 
         return true;
     }
