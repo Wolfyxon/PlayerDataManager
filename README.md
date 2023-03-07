@@ -34,38 +34,51 @@ Permission: `playerdatamgr.commands.main.get`
 ##### File
 Gets player's data **.dat** file inside **playerdata** folder.
 
-Usage: `/playerdata file <username or UUID>`  
+Usage: `/playerdata file <username/UUID>`  
 Permission: `playerdatamgr.commands.main.file`
 
 ##### GetPos
 Gets player's last saved position and dimension. 
 
-Usage: `/playerdata getpos <username or UUID>`  
+Usage: `/playerdata getpos <username/UUID>`  
 Permission: `playerdatamgr.commands.main.getpos`
 
 ##### GetSpawn
 Gets player's last saved spawn position and dimension.
 
-Usage: `/playerdata getspawn <username or UUID>`  
+Usage: `/playerdata getspawn <username/UUID>`  
 Permission: `playerdatamgr.commands.main.getspawn`
 
 ##### Reset
 Completely resets player's data. Proceed with caution.
 
-Usage: `/playerdata reset <username or UUID>`  
+Usage: `/playerdata reset <username/UUID>`  
 Permission: `playerdatamgr.commands.main.reset`
 
 ##### ClearInventory
 Clears player's inventory
 
-Usage: `/playerdata clearinventory <username or UUID>`  
+Usage: `/playerdata clearinventory <username/UUID>`  
 Permission: `playerdatamgr.commands.main.clearinventory`
 
 ##### ClearEnder
 Clears player's enderchest.
 
-Usage: `/playerdata clearender <username or UUID>`  
+Usage: `/playerdata clearender <username/UUID>`  
 Permission: `playerdatamgr.commands.main.clearender`
+
+##### Copy
+Copies all first player's data to the 2nd player.
+
+Usage: `/playerdata copy <A username/UUID> <B username/UUID>`  
+Permission: `playerdatamgr.commands.main.copy`
+
+##### Transfer
+Moves all first player's data to the 2nd player.
+
+Usage: `/playerdata transfer <A username/UUID> <B username/UUID>`  
+Permission: `playerdatamgr.commands.main.transfer`
+
 </details>
 
 ### UUID
