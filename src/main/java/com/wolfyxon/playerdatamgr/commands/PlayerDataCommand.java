@@ -165,7 +165,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
 
         switch (action) {
             case "file":{
-                plugin.msgs.clickCopy(sender,"&1Path: &r"+filePath,filePath);
+                plugin.msgs.clickCopy(sender,"&2Path: &r\n"+filePath,filePath);
                 break;}
             case "get":{
                 String strJson = utils.prettyJSON(jsonData);
