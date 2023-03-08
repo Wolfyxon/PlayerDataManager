@@ -39,7 +39,7 @@ public class SeenCommand implements CommandExecutor {
         else {
             OfflinePlayer offlinePlr = Bukkit.getOfflinePlayer(usernameOrUUID);
             if(offlinePlr == null){
-                plugin.msgs.errorMsg(sender,"Failed to get player");
+                plugin.msgs.sendID(sender,"error.playerCantGet");
                 return true;
             }
             if(!offlinePlr.hasPlayedBefore()){
