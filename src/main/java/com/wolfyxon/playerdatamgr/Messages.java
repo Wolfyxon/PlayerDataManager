@@ -20,6 +20,13 @@ public class Messages {
         if(msg.equals("")){return;}
         sender.sendMessage(msg);
     }
+    public static String format(String message, String field, String value){return message.replace("{"+field+"}",value);}
+    public static String formatUsername(String message, String username){return format(message,"username",username);}
+    public static String formatUUID(String message, String uuid){return format(message,"uuid",uuid);}
+    public static String formatFullDate(String message, String date){return format(message,"date",date);}
+    public static String formatOffsetTime(String message, String offset){return format(message,"offset",offset);}
+
+
 
     public void errorMsg(CommandSender sender,String message){
      sender.sendMessage(ChatColor.RED+message);
