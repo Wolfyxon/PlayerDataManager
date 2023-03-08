@@ -1,5 +1,6 @@
 package com.wolfyxon.playerdatamgr.commands;
 
+import com.wolfyxon.playerdatamgr.Messages;
 import com.wolfyxon.playerdatamgr.PlayerDataMgr;
 import com.wolfyxon.playerdatamgr.Utils;
 import org.bukkit.Bukkit;
@@ -42,7 +43,13 @@ public class FirstJoinedCommand implements CommandExecutor {
         Date firstonline = new Date(timestamp);
 
         String strDate = utils.dateFormat(firstonline);
-        sender.sendMessage(utils.colored("&2&l" + offlinePlr.getName() + "&r&2 played for the first time on " + strDate));
+        sender.sendMessage(
+                Messages.formatFullDate(
+                        Messages.formatUsername(
+                        plugin.msgs.getMsg("commands.firstJoined"),
+                        offlinePlr.getName())
+                        ,strDate)
+        );
         return true;
 
     }
