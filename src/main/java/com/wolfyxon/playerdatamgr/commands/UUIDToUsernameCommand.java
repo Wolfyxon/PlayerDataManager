@@ -29,7 +29,7 @@ public class UUIDToUsernameCommand implements CommandExecutor {
             plugin.msgs.sendID(sender, "error.playerCantGet");
             return true;
         }
-        sender.sendMessage(utils.colored("&1Username of &7"+input+"&r:"));
+        sender.sendMessage(utils.colored("&2Username of &7"+input+"&r:"));
         plugin.msgs.clickCopy(sender,username,username);
 
         return true;
