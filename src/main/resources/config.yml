@@ -8,8 +8,7 @@ messages:
   hasntPlayed: "&6&l{username}&r&6 hasn't played on the server yet."
   clickToCopy: "Click to copy"
   commands:
-    firstJoined:
-      main: "&2&l{username}&r&2 played for the first time on {date}"
+    firstJoined: "&2&l{username}&r&2 played for the first time on {date}"
     seen:
       online: "&a&l{username}&r&a is now online!"
       main: "&2&l{username}&r&2 was last online on {date}"
