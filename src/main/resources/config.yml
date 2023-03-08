@@ -5,6 +5,28 @@ messages:
   # Please avoid modifying the messages too much (especially the errors) so they can be understood by you and other admins
   # To disable a message leave a blank "" (avoid doing this)
   apiConnecting: "&7Querying MojangAPI, please wait..."
+  hasntPlayed: "&6&l{username}&r&6 hasn't played on the server yet."
+  clickToCopy: "Click to copy"
+  commands:
+    firstJoined:
+      main: "&2&l{username}&r&2 played for the first time on {date}"
+    seen:
+      online: "&a&l{username}&r&a is now online!"
+      main: "&2&l{username}&r&2 was last online on {date}"
+    UUIDToUsername: "&2Username of &7{uuid}&r:\n{username}"
+    offlineUUID:
+      header: "&1UUID of &l{username}&r&1:"
+      UUIDColor: "&a"
+      warn: "&6WARNING: Server is in online mode, consider using &l/onlineuuid"
+    onlineUUID:
+      header: "&1UUID of &l{username}&r&1:"
+      UUIDColor: "&a"
+      warn: "&6WARNING: Server is in offline mode, consider using &l/offlineuuid"
+
+  warn:
+    hasntPlayed: "&6WARNING: This player has never played on this server!"
+
+
   error:
     api:
       playerCantGet: "Player not found in the Mojang API or no internet connection."
