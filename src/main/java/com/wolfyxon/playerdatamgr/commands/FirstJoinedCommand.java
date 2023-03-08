@@ -34,7 +34,7 @@ public class FirstJoinedCommand implements CommandExecutor {
             return true;
         }
         if (!offlinePlr.hasPlayedBefore()) {
-            sender.sendMessage(utils.colored("&6&l" + offlinePlr.getName() + "&r&6 hasn't played on the server yet."));
+            Messages.formatUsername(plugin.msgs.getMsg("hasntPlayed"),offlinePlr.getName());
             return true;
         }
 
