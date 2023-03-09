@@ -87,5 +87,10 @@
             <artifactId>NBT</artifactId>
             <version>6.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.ocpsoft.prettytime</groupId>
+            <artifactId>prettytime</artifactId>
+            <version>5.0.6.Final</version>
+        </dependency>
     </dependencies>
 </project>
