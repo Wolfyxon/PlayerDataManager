@@ -70,6 +70,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
     }
 
     Map<String, String> actions = new HashMap<String, String>();
+    String[] setActions = {"spawn","pos","gamemode","hp"};
     String[] nonPlayerActions= {"help"};
     String permPrefix = "commands.main.";
     public PlayerDataCommand(PlayerDataMgr main) {
@@ -86,6 +87,8 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         //actions.put("editinventory","Opens a GUI to edit player's inventory.");
         actions.put("getpos","Gets last player's coordinates.");
         actions.put("getspawn","Gets player's spawn location.");
+
+
     }
 
     @Override
@@ -268,6 +271,9 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                             +"\nRepeat this command with &lconfirm&r&4 at the end to proceed."));
                 }
                 break;}
+            case "set":{
+                
+            break;}
         }
 
         return true;
