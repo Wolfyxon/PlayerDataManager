@@ -29,6 +29,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
 
     private void save(JSONObject data,String path) {
         try {
+            data = fixData(data);
             NBTUtil.write((CompoundTag) SNBTUtil.fromSNBT(data.toString()), new File(path));
         } catch (IOException e){
             e.printStackTrace();
