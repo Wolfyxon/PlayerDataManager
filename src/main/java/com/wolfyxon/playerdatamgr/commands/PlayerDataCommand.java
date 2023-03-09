@@ -204,7 +204,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
             case "clearender":{
                 jsonData.put("EnderItems",new ArrayList<>());
                 save(jsonData,filePath);
-                sender.sendMessage(utils.colored("&Enderchest has been cleared."));
+                sender.sendMessage(utils.colored("&6Enderchest has been cleared."));
                 reloadPlayer(plr);
                 break;}
             case "getpos":{
