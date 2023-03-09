@@ -1,5 +1,6 @@
 dateFormat:
   full: "dd.MM.yyyy hh:mm:ss" # see https://www.w3schools.com/java/java_date.asp
+  relativeLocale: "en" #Example relative date: 2 months 5 hours 20 minutes and 5 seconds ago
 
 messages:
   # Please avoid modifying the messages too much (especially the errors) so they can be understood by you and other admins
