@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +43,10 @@ public class Utils {
         boolean has = hasPermission(sender,permission);
         if (!has){plugin.msgs.sendID(sender,"error.noPermission");}
         return has;
+    }
+
+    public String formatRelativeTime(Date date){
+        return new PrettyTime(new Locale((String) plugin.config.get("dateFormat.relativeLocale"))).format(date);
     }
 
     public String dateFormat(Date date){
