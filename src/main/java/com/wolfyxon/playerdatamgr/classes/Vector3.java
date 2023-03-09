@@ -1,10 +1,7 @@
 package com.wolfyxon.playerdatamgr.classes;
 
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.json.JSONArray;
-
-import java.util.function.DoubleBinaryOperator;
 
 public class Vector3 {
     public static String currentPositionChar = "~";
