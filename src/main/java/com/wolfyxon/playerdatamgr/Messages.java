@@ -24,7 +24,7 @@ public class Messages {
     public static String formatUsername(String message, String username){return format(message,"username",username);}
     public static String formatUUID(String message, String uuid){return format(message,"uuid",uuid);}
     public static String formatFullDate(String message, String date){return format(message,"date",date);}
-    public static String formatOffsetTime(String message, String offset){return format(message,"offset",offset);}
+    public static String formatRelativeTime(String message, String strRelativeDate){return format(message,"relativeTime",strRelativeDate);}
 
 
 
