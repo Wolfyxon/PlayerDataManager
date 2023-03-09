@@ -1,6 +1,6 @@
 dateFormat:
   full: "dd.MM.yyyy hh:mm:ss" # see https://www.w3schools.com/java/java_date.asp
-  relativeLocale: "en" #Examples "en": date: 2 months 5 hours 20 minutes and 5 seconds ago | "pl": 2 miesiące 5 godzin 20 minut i 5 sekund temu
+  relativeLocale: "en" #Examples "en": 2 months 5 hours 20 minutes and 5 seconds ago | "pl": 2 miesiące 5 godzin 20 minut i 5 sekund temu
 
 messages:
   # Please avoid modifying the messages too much (especially the errors) so they can be understood by you and other admins
