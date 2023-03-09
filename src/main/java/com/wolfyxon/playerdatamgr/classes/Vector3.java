@@ -1,8 +1,14 @@
 package com.wolfyxon.playerdatamgr.classes;
 
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.json.JSONArray;
 
+import java.util.function.DoubleBinaryOperator;
+
 public class Vector3 {
+    public static String currentPositionChar = "~";
+
     public double x;
     public double y;
     public double z;
@@ -33,6 +39,33 @@ public class Vector3 {
         x = formatAxis((double) jsonArray.get(0));
         y = formatAxis((double) jsonArray.get(1));
         z = formatAxis((double) jsonArray.get(2));
+    }
+    public Vector3(String xyz){
+        String[] split = xyz.split(" ");
+        x = formatAxis((double) Double.valueOf(split[0]));
+        y = formatAxis((double) Double.valueOf(split[0]));
+        z = formatAxis((double) Double.valueOf(split[0]));
+    }
+    public Vector3(String xyz, Player as){
+        double plrX = as.getLocation().getX();
+        double plrY = as.getLocation().getY();
+        double plrZ = as.getLocation().getZ();
+
+        double[] plrPos = {plrX,plrY,plrZ};
+
+        String[] split = xyz.split(" ");
+        for (int i=0;i<split.length;i++){
+            String ch = split[i];
+            try {Double.parseDouble(ch);}
+            catch(NumberFormatException e) {
+                if(ch != currentPositionChar) return;
+                split[i] = String.valueOf(plrPos[i]);
+            }
+        }
+
+        x = formatAxis((double) Double.valueOf(split[0]));
+        y = formatAxis((double) Double.valueOf(split[1]));
+        z = formatAxis((double) Double.valueOf(split[2]));
     }
 
     @Override
