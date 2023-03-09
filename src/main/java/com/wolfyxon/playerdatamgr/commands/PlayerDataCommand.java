@@ -68,6 +68,13 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         }
         return filePath;
     }
+    private JSONObject fixData(JSONObject jsonData){
+        jsonData = NBTManager.fixDoubleArray(jsonData,"Pos");
+        jsonData = NBTManager.fixDoubleArray(jsonData,"Rotation");
+        jsonData = NBTManager.fixDoubleArray(jsonData,"Motion");
+        jsonData = NBTManager.fixDoubleArray(jsonData,"Paper.Origin");
+        return jsonData;
+    }
 
     Map<String, String> actions = new HashMap<String, String>();
     String[] setActions = {"spawn","pos","gamemode","hp"};
@@ -161,10 +168,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
         }
         if(plr != null && !plr.isOnline()){plr = null;}
 
-        jsonData = nbt.fixDoubleArray(jsonData,"Pos");
-        jsonData = nbt.fixDoubleArray(jsonData,"Rotation");
-        jsonData = nbt.fixDoubleArray(jsonData,"Motion");
-        jsonData = nbt.fixDoubleArray(jsonData,"Paper.Origin");
+        jsonData = fixData(jsonData);
 
         switch (action) {
             case "file":{
@@ -272,7 +276,7 @@ public class PlayerDataCommand implements CommandExecutor, TabCompleter {
                 }
                 break;}
             case "set":{
-                
+
             break;}
         }
 
