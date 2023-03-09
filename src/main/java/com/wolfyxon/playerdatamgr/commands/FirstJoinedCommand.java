@@ -41,7 +41,6 @@ public class FirstJoinedCommand implements CommandExecutor {
         long timestamp = offlinePlr.getFirstPlayed();
         Date firstonline = new Date(timestamp);
         String relative = utils.formatRelativeTime(firstonline);
-        sender.sendMessage("AAA "+relative);
         String strDate = utils.dateFormat(firstonline);
         sender.sendMessage(
                 Messages.formatFullDate(
