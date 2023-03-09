@@ -12,7 +12,7 @@ messages:
     firstJoined: "&2&l{username}&r&2 played for the first time on {date}. ({relativeTime})"
     seen:
       online: "&a&l{username}&r&a is now online!"
-      main: "&2&l{username}&r&2 was last online on {date}"
+      main: "&2&l{username}&r&2 was last online on {date} ({relativeTime})"
     UUIDToUsername: "&2Username of &7{uuid}&r:\n{username}"
     offlineUUID:
       header: "&1UUID of &l{username}&r&1:"

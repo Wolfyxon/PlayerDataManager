@@ -1,5 +1,6 @@
 package com.wolfyxon.playerdatamgr.commands;
 
+import com.wolfyxon.playerdatamgr.Messages;
 import com.wolfyxon.playerdatamgr.PlayerDataMgr;
 import com.wolfyxon.playerdatamgr.Utils;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -48,11 +49,19 @@ public class SeenCommand implements CommandExecutor {
             }
 
             long timestamp = offlinePlr.getLastPlayed();
-            long distance = timestamp-new Date().getTime();
             Date lastonline = new Date(timestamp);
-
+            String relative = utils.formatRelativeTime(lastonline);
             String strDate = utils.dateFormat(lastonline);
-            sender.sendMessage(utils.colored("&2&l"+offlinePlr.getName()+"&r&2 was last online on "+strDate));
+
+            sender.sendMessage(
+                    Messages.formatUsername(
+                            Messages.formatFullDate(
+                                    Messages.formatRelativeTime(
+                                            plugin.msgs.getMsg("commands.seen.main")
+                                            ,relative)
+                                    ,strDate)
+                            ,offlinePlr.getName())
+            );
             return true;
         }
     }
