@@ -9,6 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.yaml.snakeyaml.events.SequenceEndEvent;
 
 import java.util.Date;
 
@@ -24,31 +25,32 @@ public class FirstJoinedCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length < 1) {
-            plugin.msgs.sendID(sender,"error.unspecified.player");
+            plugin.msgs.sendID(sender, "error.unspecified.player");
             return true;
         }
         String usernameOrUUID = args[0];
         OfflinePlayer offlinePlr = Bukkit.getOfflinePlayer(usernameOrUUID);
         if (offlinePlr == null) {
-            plugin.msgs.sendID(sender,"error.playerCantGet");
+            plugin.msgs.sendID(sender, "error.playerCantGet");
             return true;
         }
         if (!offlinePlr.hasPlayedBefore()) {
-            Messages.formatUsername(plugin.msgs.getMsg("hasntPlayed"),offlinePlr.getName());
+            sender.sendMessage(Messages.formatUsername(plugin.msgs.getMsg("hasntPlayed"), offlinePlr.getName()));
             return true;
         }
-
         long timestamp = offlinePlr.getFirstPlayed();
-        long distance = timestamp - new Date().getTime();
         Date firstonline = new Date(timestamp);
-
+        String relative = utils.formatRelativeTime(firstonline);
+        sender.sendMessage("AAA "+relative);
         String strDate = utils.dateFormat(firstonline);
         sender.sendMessage(
                 Messages.formatFullDate(
-                        Messages.formatUsername(
-                        plugin.msgs.getMsg("commands.firstJoined"),
-                        offlinePlr.getName())
-                        ,strDate)
+                        Messages.formatRelativeTime(
+                                Messages.formatUsername(
+                                        plugin.msgs.getMsg("commands.firstJoined"),
+                                        offlinePlr.getName())
+                                , relative)
+                        , strDate)
         );
         return true;
 
