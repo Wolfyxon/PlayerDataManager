@@ -2,6 +2,9 @@
 A simple Minecraft Spigot plugin for managing players' data. Useful in fixing book/shulker bans.
 It even works if the player is not currently playing.
 
+>[!IMPORTANT]
+> This plugin is not being worked on anymore.
+
 Supported versons: `1.19`+
 
 ## This plugin is still in development
